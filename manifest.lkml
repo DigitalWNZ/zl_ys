@@ -3,5 +3,5 @@ constant: lzdiagtable {
 }
 
 constant: cdnview{
-  value: "opscenter.network_diagnosis_sea.su_vn_cdn"
+  value: "opscenter.network_diagnosis_asia.htzx_asia_cdn"
 }
