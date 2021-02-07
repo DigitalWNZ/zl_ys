@@ -7,6 +7,44 @@ view: lz_net_dig_test {
     sql: ${TABLE}.Average ;;
   }
 
+  dimension: average_interval {
+    case: {
+      when: {
+        sql: ${average} > 0 AND ${average} <= 30;;
+        label: "(0,30]"
+      }
+      when: {
+        sql: ${average} > 30 AND ${average} <= 60;;
+        label: "(30,60]"
+      }
+      when: {
+        sql: ${average} > 60 AND ${average} <= 90;;
+        label: "(60,90]"
+      }
+      when: {
+        sql: ${average} > 90 AND ${average} <= 120;;
+        label: "(90,120]"
+      }
+      when: {
+        sql: ${average} > 120 AND ${average} <= 150;;
+        label: "(120,150]"
+      }
+      when: {
+        sql: ${average} > 150 AND ${average} <= 180;;
+        label: "(150,180]"
+      }
+      when: {
+        sql: ${average} > 180 AND ${average} <= 200;;
+        label: "(180,200]"
+      }
+      when: {
+        sql: ${average} > 200;;
+        label: "(200+]"
+      }
+      else: "Invalid Value"
+    }
+  }
+
   dimension: client_ip {
     type: string
     sql: ${TABLE}.ClientIP ;;
@@ -118,6 +156,12 @@ view: lz_net_dig_test {
     drill_fields: [name]
   }
 
+  measure: valid_count {
+    type: count
+    filters: [average: ">0"]
+    drill_fields: [geo_ip_country.country,geo_ip_isp.asn,client_ip,average]
+  }
+
   measure: sum_total {
     type: sum
     sql: ${TABLE}.total ;;
@@ -126,6 +170,11 @@ view: lz_net_dig_test {
   measure: sum_lost {
     type: sum
     sql: ${TABLE}.lost ;;
+  }
+
+  measure: count_distinct_ip {
+    type: count_distinct
+    sql: ${client_ip} ;;
   }
 
   # measure: lost_rate {
@@ -179,6 +228,7 @@ view: lz_net_dig_test {
     type: percentile
     percentile: 90
     sql: ${average} ;;
+    drill_fields: [client_ip,average]
   }
   measure: pert_80 {
     type: percentile
@@ -221,6 +271,8 @@ view: lz_net_dig_test {
     sql: ${average} ;;
   }
 }
+
+
 
 view: lz_net_dig_test__tracert {
   dimension: delay {

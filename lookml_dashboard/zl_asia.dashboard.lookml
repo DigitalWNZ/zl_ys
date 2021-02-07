@@ -83,7 +83,7 @@
       ClientIP: first_2_Hop.client_ip
       GCP_PEER_ASN: gcp_hop.gcp_peer_asn
       Show Records Where GCP Hop is the highest: gcp_hop.gcp_max
-    row: 74
+    row: 101
     col: 0
     width: 24
     height: 8
@@ -193,7 +193,7 @@
       Client_ASN: geo_ip_isp_range.asn
       ClientIP: gcp_hop.client_ip
       GCP_PEER_ASN: gcp_hop.gcp_peer_asn
-    row: 52
+    row: 69
     col: 16
     width: 8
     height: 12
@@ -274,7 +274,7 @@
       ISP: geo_ip_isp_range.isp
       Client_ASN: geo_ip_isp_range.asn
       ClientIP: lz_net_dig_test.client_ip
-    row: 66
+    row: 93
     col: 0
     width: 24
     height: 8
@@ -289,14 +289,14 @@
   - name: Hop By ISP
     type: text
     title_text: Hop By ISP
-    row: 50
+    row: 89
     col: 0
     width: 24
     height: 2
   - name: Ping  and Trace Detail By IP
     type: text
     title_text: Ping  and Trace Detail By IP
-    row: 64
+    row: 91
     col: 0
     width: 24
     height: 2
@@ -335,7 +335,7 @@
       ISP: geo_ip_isp_range.isp
       Client_ASN: geo_ip_isp_range.asn
       ClientIP: stat_from_cdn.remote_ip
-    row: 92
+    row: 119
     col: 0
     width: 24
     height: 7
@@ -392,7 +392,7 @@
       ISP: geo_ip_isp_range.isp
       Client_ASN: geo_ip_isp_range.asn
       ClientIP: stat_from_cdn.remote_ip
-    row: 82
+    row: 112
     col: 0
     width: 24
     height: 7
@@ -423,7 +423,7 @@
       ISP: geo_ip_isp_range.isp
       Client_ASN: geo_ip_isp_range.asn
       ClientIP: stat_from_cdn.remote_ip
-    row: 89
+    row: 109
     col: 0
     width: 12
     height: 3
@@ -453,19 +453,18 @@
       ISP: geo_ip_isp_range.isp
       Client_ASN: geo_ip_isp_range.asn
       ClientIP: stat_from_cdn.remote_ip
-    row: 89
+    row: 109
     col: 12
     width: 12
     height: 3
-  - name: lost_rate_interval_by_hour_v1
-    title: lost_rate_interval_by_hour_v1
+  - title: lost_rate_interval_by_hour_v1
+    name: lost_rate_interval_by_hour_v1
     model: zl_asia
     explore: lz_net_dig_test_1
     type: looker_column
     fields: [lz_net_dig_test.count, lz_net_dig_test.time_hour, lz_net_dig_test.lost_rate_interval]
     pivots: [lz_net_dig_test.lost_rate_interval]
     fill_fields: [lz_net_dig_test.time_hour, lz_net_dig_test.lost_rate_interval]
-    filters: {}
     sorts: [lz_net_dig_test.lost_rate_internval, lz_net_dig_test.time_hour desc]
     limit: 500
     query_timezone: America/Los_Angeles
@@ -506,8 +505,8 @@
     col: 0
     width: 24
     height: 10
-  - name: pert90_by_country_v1
-    title: pert90_by_country_v1
+  - title: pert90_by_country_v1
+    name: pert90_by_country_v1
     model: zl_asia
     explore: lz_net_dig_test_2
     type: looker_line
@@ -555,12 +554,12 @@
       ISP: lz_net_dig_test.isp
       Client_ASN: geo_ip_isp_range.asn
       ClientIP: lz_net_dig_test.client_ip
-    row: 26
+    row: 45
     col: 0
     width: 24
     height: 12
-  - name: pert80_by_country_v1
-    title: pert80_by_country_v1
+  - title: pert80_by_country_v1
+    name: pert80_by_country_v1
     model: zl_asia
     explore: lz_net_dig_test_2
     type: looker_line
@@ -608,7 +607,7 @@
       ISP: geo_ip_isp_range.isp
       Client_ASN: geo_ip_isp_range.asn
       ClientIP: lz_net_dig_test.client_ip
-    row: 38
+    row: 57
     col: 0
     width: 24
     height: 12
@@ -659,7 +658,7 @@
       ISP: geo_ip_isp_range.isp
       Client_ASN: geo_ip_isp_range.asn
       ClientIP: first_Hop.client_ip
-    row: 52
+    row: 69
     col: 0
     width: 8
     height: 12
@@ -710,10 +709,192 @@
       ISP: geo_ip_isp_range.isp
       Client_ASN: geo_ip_isp_range.asn
       ClientIP: second_Hop.client_ip
-    row: 52
+    row: 69
     col: 8
     width: 8
     height: 12
+  - title: Raw_data_ping
+    name: Raw_data_ping
+    model: zl_asia
+    explore: lz_net_dig_test_1
+    type: looker_grid
+    fields: [geo_ip_country_range.country_iso_code, geo_ip_isp_range.isp, geo_ip_isp_range.asn,
+      lz_net_dig_test.client_ip, lz_net_dig_test.name, lz_net_dig_test.user_id, lz_net_dig_test.average]
+    filters:
+      lz_net_dig_test.isp: ''
+    sorts: [geo_ip_isp_range.asn]
+    limit: 5000
+    column_limit: 50
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: true
+    header_text_alignment: left
+    header_font_size: '12'
+    rows_font_size: '12'
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    show_sql_query_menu_options: false
+    show_totals: true
+    show_row_totals: true
+    series_cell_visualizations:
+      lz_net_dig_test.pert_90:
+        is_active: true
+    conditional_formatting: [{type: along a scale..., value: !!null '', background_color: "#3EB0D5",
+        font_color: !!null '', color_application: {collection_id: b43731d5-dc87-4a8e-b807-635bef3948e7,
+          palette_id: afd46b40-e939-4ace-bffd-69d1bb16ee05, options: {steps: 5, constraints: {
+              min: {type: number, value: 500}, mid: {type: middle}, max: {type: maximum}},
+            mirror: false, reverse: false, stepped: false}}, bold: false, italic: false,
+        strikethrough: false, fields: !!null ''}]
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    defaults_version: 1
+    series_types: {}
+    hidden_fields: []
+    y_axes: []
+    listen:
+      Date: lz_net_dig_test.time_date
+      Server Domain Name: lz_net_dig_test.name
+      Country: geo_ip_country_range.country_iso_code
+      ISP: geo_ip_isp_range.isp
+      Client_ASN: geo_ip_isp_range.asn
+      ClientIP: lz_net_dig_test.client_ip
+    row: 81
+    col: 0
+    width: 24
+    height: 8
+  - title: ping_interval_by_isp
+    name: ping_interval_by_isp
+    model: zl_asia
+    explore: lz_net_dig_test_1
+    type: looker_column
+    fields: [lz_net_dig_test.average_interval, geo_ip_isp_range.isp, lz_net_dig_test.valid_count]
+    pivots: [geo_ip_isp_range.isp]
+    fill_fields: [lz_net_dig_test.average_interval]
+    sorts: [geo_ip_isp_range.isp 0, lz_net_dig_test.average_interval]
+    limit: 500
+    column_limit: 50
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: normal
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    series_types: {}
+    defaults_version: 1
+    listen:
+      Date: lz_net_dig_test.time_date
+      Server Domain Name: lz_net_dig_test.name
+      Country: geo_ip_country_range.country_iso_code
+      ISP: geo_ip_isp_range.isp
+      Client_ASN: geo_ip_isp_range.asn
+      ClientIP: lz_net_dig_test.client_ip
+    row: 35
+    col: 0
+    width: 24
+    height: 10
+  - title: ping_interval_by_country
+    name: ping_interval_by_country
+    model: zl_asia
+    explore: lz_net_dig_test_1
+    type: looker_column
+    fields: [lz_net_dig_test.average_interval, geo_ip_country_range.country_iso_code,
+      lz_net_dig_test.valid_count]
+    pivots: [geo_ip_country_range.country_iso_code]
+    fill_fields: [lz_net_dig_test.average_interval]
+    sorts: [geo_ip_country_range.country_iso_code 0, lz_net_dig_test.average_interval]
+    limit: 500
+    column_limit: 50
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: normal
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    series_types: {}
+    defaults_version: 1
+    listen:
+      Date: lz_net_dig_test.time_date
+      Server Domain Name: lz_net_dig_test.name
+      Country: geo_ip_country_range.country_iso_code
+      ISP: geo_ip_isp_range.isp
+      Client_ASN: geo_ip_isp_range.asn
+      ClientIP: lz_net_dig_test.client_ip
+    row: 26
+    col: 0
+    width: 24
+    height: 9
   filters:
   - name: Date
     title: Date
@@ -730,13 +911,17 @@
     field: lz_net_dig_test.time_date
   - name: Server Domain Name
     title: Server Domain Name
-    type: string_filter
+    type: field_filter
     default_value: ''
     allow_multiple_values: true
     required: false
     ui_config:
       type: advanced
       display: popover
+    model: zl_asia
+    explore: lz_net_dig_test_1
+    listens_to_filters: []
+    field: lz_net_dig_test.name
   - name: Country
     title: Country
     type: string_filter
