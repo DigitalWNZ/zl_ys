@@ -193,7 +193,7 @@
       Client_ASN: geo_ip_isp_range.asn
       ClientIP: gcp_hop.client_ip
       GCP_PEER_ASN: gcp_hop.gcp_peer_asn
-    row: 69
+    row: 79
     col: 16
     width: 8
     height: 12
@@ -289,7 +289,7 @@
   - name: Hop By ISP
     type: text
     title_text: Hop By ISP
-    row: 89
+    row: 77
     col: 0
     width: 24
     height: 2
@@ -335,7 +335,7 @@
       ISP: geo_ip_isp_range.isp
       Client_ASN: geo_ip_isp_range.asn
       ClientIP: stat_from_cdn.remote_ip
-    row: 119
+    row: 137
     col: 0
     width: 24
     height: 7
@@ -392,7 +392,7 @@
       ISP: geo_ip_isp_range.isp
       Client_ASN: geo_ip_isp_range.asn
       ClientIP: stat_from_cdn.remote_ip
-    row: 112
+    row: 130
     col: 0
     width: 24
     height: 7
@@ -423,7 +423,7 @@
       ISP: geo_ip_isp_range.isp
       Client_ASN: geo_ip_isp_range.asn
       ClientIP: stat_from_cdn.remote_ip
-    row: 109
+    row: 127
     col: 0
     width: 12
     height: 3
@@ -453,7 +453,7 @@
       ISP: geo_ip_isp_range.isp
       Client_ASN: geo_ip_isp_range.asn
       ClientIP: stat_from_cdn.remote_ip
-    row: 109
+    row: 127
     col: 12
     width: 12
     height: 3
@@ -658,7 +658,7 @@
       ISP: geo_ip_isp_range.isp
       Client_ASN: geo_ip_isp_range.asn
       ClientIP: first_Hop.client_ip
-    row: 69
+    row: 79
     col: 0
     width: 8
     height: 12
@@ -709,7 +709,7 @@
       ISP: geo_ip_isp_range.isp
       Client_ASN: geo_ip_isp_range.asn
       ClientIP: second_Hop.client_ip
-    row: 69
+    row: 79
     col: 8
     width: 8
     height: 12
@@ -788,7 +788,7 @@
       ISP: geo_ip_isp_range.isp
       Client_ASN: geo_ip_isp_range.asn
       ClientIP: lz_net_dig_test.client_ip
-    row: 81
+    row: 69
     col: 0
     width: 24
     height: 8
@@ -895,6 +895,107 @@
     col: 0
     width: 24
     height: 9
+  - title: pos_status_by_30m
+    name: pos_status_by_30m
+    model: zl_asia
+    explore: htzx_asia_update
+    type: looker_column
+    fields: [htzx_asia_update.timekey_30_time, htzx_asia_update.count_status_1]
+    sorts: [htzx_asia_update.timekey_30_time desc]
+    limit: 500
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    series_types: {}
+    defaults_version: 1
+    listen:
+      Date: htzx_asia_update.time_date
+      Country: geo_ip_country_range.country_iso_code
+      ISP: geo_ip_isp_range.isp
+      Client_ASN: geo_ip_isp_range.asn
+      ClientIP: htzx_asia_update.client_ip
+    row: 111
+    col: 0
+    width: 24
+    height: 8
+  - title: sum_downloadsize_by_usetime_30m
+    name: sum_downloadsize_by_usetime_30m
+    model: zl_asia
+    explore: htzx_asia_update
+    type: looker_column
+    fields: [htzx_asia_update.timekey_30_time, htzx_asia_update.sum_downloadsize_by_usetime]
+    sorts: [htzx_asia_update.timekey_30_time desc]
+    limit: 500
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    series_types: {}
+    defaults_version: 1
+    listen:
+      Date: htzx_asia_update.time_date
+      Country: geo_ip_country_range.country_iso_code
+      ISP: geo_ip_isp_range.isp
+      Client_ASN: geo_ip_isp_range.asn
+      ClientIP: htzx_asia_update.client_ip
+    row: 119
+    col: 0
+    width: 24
+    height: 8
+  - name: Data Stat from htzx_asia_update
+    type: text
+    title_text: Data Stat from htzx_asia_update
+    row: 109
+    col: 0
+    width: 24
+    height: 2
   filters:
   - name: Date
     title: Date
