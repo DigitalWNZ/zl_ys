@@ -1039,8 +1039,6 @@
       Date: lz_net_dig_test.time_date
       Server Domain Name: lz_net_dig_test.name
       Country: geo_ip_country_range.country_iso_code
-      ISP: geo_ip_isp_range.isp
-      Client_ASN: geo_ip_isp_range.asn
       ClientIP: lz_net_dig_test.client_ip
     row: 129
     col: 0
@@ -1086,8 +1084,6 @@
       Date: lz_net_dig_test.time_date
       Server Domain Name: lz_net_dig_test.name
       Country: geo_ip_country_range.country_iso_code
-      ISP: geo_ip_isp_range.isp
-      Client_ASN: geo_ip_isp_range.asn
       ClientIP: lz_net_dig_test.client_ip
     row: 137
     col: 0
