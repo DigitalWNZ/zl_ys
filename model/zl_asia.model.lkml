@@ -71,6 +71,7 @@ explore: lz_net_dig_test_1 {
   }
 
 
+
   explore: lz_net_dig_test_2 {
     view_name: lz_net_dig_test
     sql_always_where: ${lz_net_dig_test.diagtype} = 1
@@ -96,6 +97,32 @@ explore: lz_net_dig_test_1 {
         relationship: many_to_one
       }
     }
+
+explore: lz_net_dig_test_4 {
+  view_name: lz_net_dig_test
+  sql_always_where: ${lz_net_dig_test.diagtype} = 4
+      -- and ${lz_net_dig_test.average} >= 0
+      and (NET.SAFE_IP_FROM_STRING(${lz_net_dig_test.client_ip}) BETWEEN NET.SAFE_IP_FROM_STRING(${geo_ip_country_range.start_ip}) AND NET.SAFE_IP_FROM_STRING(${geo_ip_country_range.end_ip}))
+      and (NET.SAFE_IP_FROM_STRING(${lz_net_dig_test.client_ip}) BETWEEN NET.SAFE_IP_FROM_STRING(${geo_ip_isp_range.start_ip}) AND NET.SAFE_IP_FROM_STRING(${geo_ip_isp_range.end_ip}))  ;;
+    #   join: lz_net_dig_test_temp_1__tracert {
+    #     view_label: "Lznetdigtesttemp 1: Tracert"
+    #     sql: LEFT JOIN UNNEST(${lz_net_dig_test_temp_1.tracert}) as lz_net_dig_test_temp_1__tracert ;;
+    #     relationship: one_to_many
+    #   }
+    #   join: lz_net_dig_test {
+    #     relationship: one_to_one
+    #   }
+    join: geo_ip_country_range {
+      type: left_outer
+      sql_on: NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${lz_net_dig_test.client_ip}),16) = NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${geo_ip_country_range.start_ip}),16) ;;
+      relationship: many_to_one
+    }
+    join: geo_ip_isp_range {
+      type: left_outer
+      sql_on: NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${lz_net_dig_test.client_ip}),16) = NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${geo_ip_isp_range.start_ip}),16) ;;
+      relationship: many_to_one
+    }
+  }
 
 # explore: lz_net_dig_test_2 {
 #   view_name: lz_net_dig_test

@@ -89,13 +89,28 @@ view: htzx_asia_update {
     sql: ifnull(${usetime},0) ;;
   }
 
-  dimension:downloadsize_by_usetime{
-    type: number
-    sql: if (${usetime_no_null}=0,0,${downloadsize}/${usetime_no_null}*1000) ;;
-    value_format_name: decimal_2
+  # dimension:downloadsize_by_usetime{
+  #   type: number
+  #   sql: if (${usetime_no_null}=0,0,(${downloadsize}/1000000)/(${usetime_no_null}*1000)) ;;
+  #   value_format_name: decimal_2
+  # }
+
+  measure: sum_downloadsize {
+    type: sum
+    sql: ${downloadsize}/1000000 ;;
+  }
+
+  measure: sum_usetime {
+    type: sum
+    sql: ${usetime}/1000 ;;
   }
 
 
+  measure:downloadsize_by_usetime{
+    type: number
+    sql: ${sum_downloadsize}/${sum_usetime} ;;
+    value_format_name: decimal_2
+  }
 
   measure: count {
     type: count
@@ -107,8 +122,6 @@ view: htzx_asia_update {
     filters: [status: "1"]
   }
 
-  measure:sum_downloadsize_by_usetime{
-    type: sum
-    sql: ${downloadsize_by_usetime} ;;
-  }
+
+
 }
