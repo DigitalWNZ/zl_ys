@@ -50,6 +50,10 @@ view: lz_net_dig_test {
     sql: ${TABLE}.ClientIP ;;
   }
 
+  dimension: clientIP_byte {
+    sql: NET.SAFE_IP_FROM_STRING(${client_ip});;
+  }
+
   dimension: device_id {
     type: string
     sql: ${TABLE}.DeviceID ;;
@@ -216,6 +220,10 @@ view: lz_net_dig_test {
     }
   }
 
+  dimension: constant_for_left_join {
+    type: number
+    sql: if(${average}=0 ,1,1) ;;
+  }
   measure: lost_rate {
     type: average
     value_format_name: percent_2

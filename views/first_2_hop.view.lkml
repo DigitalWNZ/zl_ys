@@ -4,6 +4,7 @@ view: first_2_Hop {
       insertID,
       UserID,
       ClientIP,
+      NET.SAFE_IP_FROM_STRING(ClientIP) as ClientIP_byte,
       name,
       if(safe_cast(Time as timestamp) is null,null,Time) as Time,
       if(array_length(Tracert)=0,null,tracert[offset(0)].Hop) as Hop0,
@@ -29,6 +30,11 @@ view: first_2_Hop {
   dimension: client_ip {
     type: string
     sql: ${TABLE}.ClientIP ;;
+  }
+
+  dimension: clientIP_byte {
+    type: string
+    sql:${TABLE}.ClientIP_byte;;
   }
 
   dimension: name {

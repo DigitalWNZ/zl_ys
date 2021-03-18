@@ -20,12 +20,13 @@ view: gcp_hop {
              where diagtype=2
              group by insertID),
              gcp_hop as (
-             select a.InsertID, a.UserID,a.clientIP,a.name,a.Time, tracert_array.Hop as Hop_gcp,tracert_array.Delay as Delay_gcp,borgmon.gcp_peer_asn,borgmon.Metro
+             select a.InsertID, a.UserID,a.clientIP,a.name,a.Time, tracert_array.Hop as Hop_gcp,tracert_array.Delay as Delay_gcp,borgmon.gcp_peer_asn,borgmon.Metro,
              from ${lz_net_dig_test.SQL_TABLE_NAME} a
              cross join unnest(Tracert) tracert_array
              join `opscenter.networktest.borgmonfull` borgmon on tracert_array.Hop = borgmon.Peer_IPv4
              where a.diagtype=2)
              select x.InsertID, x.UserID,x.clientIP,x.name,x.Time, x.Hop_gcp,safe_cast(x.Delay_gcp as int64) Delay_gcp ,x.gcp_peer_asn,y.hop as max_delay_hop,y.delay as max_delay,x.Metro as metro,
+             NET.SAFE_IP_FROM_STRING(x.clientIP) as ClientIP_byte,
              case when safe_cast(x.Delay_gcp as int64) = y.delay then 1 else 0 end as gcp_max
              from gcp_hop x
              left join max_delay y on x.insertID = y.insertID
@@ -46,6 +47,11 @@ dimension: client_ip {
   type: string
   sql: ${TABLE}.clientIP ;;
 }
+
+  dimension: clientIP_byte {
+    type: string
+    sql:${TABLE}.ClientIP_byte;;
+  }
 
 dimension: name {
   type: string

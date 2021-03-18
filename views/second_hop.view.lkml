@@ -4,6 +4,7 @@ view: second_Hop {
       insertID,
       UserID,
       ClientIP,
+      NET.SAFE_IP_FROM_STRING(ClientIP) as ClientIP_byte,
       name,
       if(safe_cast(Time as timestamp) is null,null,Time) as Time,
       if(array_length(Tracert)<=1,null,tracert[offset(1)].Hop) as Hop1,
@@ -17,6 +18,11 @@ view: second_Hop {
 
   measure: count {
     type: count
+  }
+
+  dimension: clientIP_byte {
+    type: string
+    sql:${TABLE}.ClientIP_byte;;
   }
 
   dimension: insert_id {

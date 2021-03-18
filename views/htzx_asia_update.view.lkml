@@ -7,6 +7,11 @@ view: htzx_asia_update {
     sql: ${TABLE}.ClientIP ;;
   }
 
+
+  dimension: clientIP_byte {
+    sql: NET.SAFE_IP_FROM_STRING(${client_ip});;
+  }
+
   dimension: device_id {
     type: string
     sql: ${TABLE}.DeviceID ;;
@@ -97,7 +102,7 @@ view: htzx_asia_update {
 
   measure: sum_downloadsize {
     type: sum
-    sql: ${downloadsize}/1000000 ;;
+    sql: ${downloadsize}/1000 ;;
   }
 
   measure: sum_usetime {

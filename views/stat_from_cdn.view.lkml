@@ -1,6 +1,6 @@
 view: stat_from_cdn {
   derived_table: {
-    sql: select timestamp, receivetimestamp,httprequest.remoteIp, httpRequest.responseSize, case when httpRequest.cacheHit then 1 else 0 end as cache_hit_int,
+    sql: select timestamp, receivetimestamp,httprequest.remoteIp, NET.SAFE_IP_FROM_STRING(httprequest.remoteIp) as RemoteIP_byte,httpRequest.responseSize, case when httpRequest.cacheHit then 1 else 0 end as cache_hit_int,
       from ${cdn_request_view.SQL_TABLE_NAME} where httprequest.remoteIp in (select clientIP from ${lz_net_dig_test.SQL_TABLE_NAME} where Diagtype = 1)
        ;;
   }
@@ -42,6 +42,11 @@ view: stat_from_cdn {
   dimension: remote_ip {
     type: string
     sql: ${TABLE}.remoteIp ;;
+  }
+
+  dimension: remoteIP_byte {
+    type: string
+    sql:${TABLE}.RemoteIP_byte;;
   }
 
   dimension: response_size {

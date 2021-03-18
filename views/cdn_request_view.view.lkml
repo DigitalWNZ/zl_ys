@@ -198,6 +198,10 @@ view: cdn_request_view__http_request {
     sql: ${TABLE}.remoteIp ;;
   }
 
+  dimension: remoteIP_byte {
+    sql:NET.SAFE_IP_FROM_STRING(${remote_ip});;
+  }
+
   dimension: request_method {
     type: string
     sql: ${TABLE}.requestMethod ;;
