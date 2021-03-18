@@ -335,7 +335,7 @@
       ISP: geo_ip_isp_range.isp
       Client_ASN: geo_ip_isp_range.asn
       ClientIP: stat_from_cdn.remote_ip
-    row: 149
+    row: 172
     col: 0
     width: 24
     height: 7
@@ -392,7 +392,7 @@
       ISP: geo_ip_isp_range.isp
       Client_ASN: geo_ip_isp_range.asn
       ClientIP: stat_from_cdn.remote_ip
-    row: 156
+    row: 165
     col: 0
     width: 24
     height: 7
@@ -423,7 +423,7 @@
       ISP: geo_ip_isp_range.isp
       Client_ASN: geo_ip_isp_range.asn
       ClientIP: stat_from_cdn.remote_ip
-    row: 146
+    row: 162
     col: 0
     width: 12
     height: 3
@@ -453,7 +453,7 @@
       ISP: geo_ip_isp_range.isp
       Client_ASN: geo_ip_isp_range.asn
       ClientIP: stat_from_cdn.remote_ip
-    row: 146
+    row: 162
     col: 12
     width: 12
     height: 3
@@ -895,12 +895,13 @@
     col: 0
     width: 24
     height: 9
-  - title: pos_status_by_30m
-    name: pos_status_by_30m
+  - title: pos_status_by_country_30m
+    name: pos_status_by_country_30m
     model: zl_asia
     explore: htzx_asia_update
     type: looker_line
-    fields: [htzx_asia_update.timekey_30_time, htzx_asia_update.count_status_1]
+    fields: [htzx_asia_update.timekey_30_time, htzx_asia_update.count_status_1, geo_ip_country_range.country_iso_code]
+    pivots: [geo_ip_country_range.country_iso_code]
     sorts: [htzx_asia_update.timekey_30_time desc]
     limit: 500
     x_axis_gridlines: false
@@ -944,12 +945,14 @@
     col: 0
     width: 24
     height: 8
-  - title: sum_downloadsize_by_usetime_30m
-    name: sum_downloadsize_by_usetime_30m
+  - title: download_speed_by_country_30m
+    name: download_speed_by_country_30m
     model: zl_asia
     explore: htzx_asia_update
     type: looker_line
-    fields: [htzx_asia_update.timekey_30_time, htzx_asia_update.downloadsize_by_usetime]
+    fields: [htzx_asia_update.timekey_30_time, geo_ip_country_range.country_iso_code,
+      htzx_asia_update.avg_download_speed]
+    pivots: [geo_ip_country_range.country_iso_code]
     sorts: [htzx_asia_update.timekey_30_time desc]
     limit: 500
     x_axis_gridlines: false
@@ -989,7 +992,7 @@
       ISP: geo_ip_isp_range.isp
       Client_ASN: geo_ip_isp_range.asn
       ClientIP: htzx_asia_update.client_ip
-    row: 119
+    row: 127
     col: 0
     width: 24
     height: 8
@@ -1040,7 +1043,7 @@
       Server Domain Name: lz_net_dig_test.name
       Country: geo_ip_country_range.country_iso_code
       ClientIP: lz_net_dig_test.client_ip
-    row: 129
+    row: 145
     col: 0
     width: 24
     height: 8
@@ -1085,17 +1088,108 @@
       Server Domain Name: lz_net_dig_test.name
       Country: geo_ip_country_range.country_iso_code
       ClientIP: lz_net_dig_test.client_ip
-    row: 137
+    row: 153
     col: 0
     width: 24
     height: 9
   - name: Diagtype_4_ping-stats
     type: text
     title_text: Diagtype_4_ping-stats
-    row: 127
+    row: 143
     col: 0
     width: 24
     height: 2
+  - title: pos_status_by_isp_30m
+    name: pos_status_by_isp_30m
+    model: zl_asia
+    explore: htzx_asia_update
+    type: looker_line
+    fields: [htzx_asia_update.count_status_1, htzx_asia_update.timekey_30_time, geo_ip_isp_range.isp]
+    pivots: [geo_ip_isp_range.isp]
+    sorts: [htzx_asia_update.timekey_30_time desc, geo_ip_isp_range.isp]
+    limit: 500
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    show_null_points: true
+    interpolation: linear
+    series_types: {}
+    defaults_version: 1
+    listen:
+      Date: htzx_asia_update.time_date
+      Country: geo_ip_country_range.country_iso_code
+      ISP: geo_ip_isp_range.isp
+      Client_ASN: geo_ip_isp_range.asn
+      ClientIP: htzx_asia_update.client_ip
+    row: 119
+    col: 0
+    width: 24
+    height: 8
+  - title: download_speed_by_isp_30m
+    name: download_speed_by_isp_30m
+    model: zl_asia
+    explore: htzx_asia_update
+    type: looker_line
+    fields: [htzx_asia_update.avg_download_speed, htzx_asia_update.timekey_30_time,
+      geo_ip_isp_range.isp]
+    pivots: [geo_ip_isp_range.isp]
+    sorts: [htzx_asia_update.timekey_30_time desc, geo_ip_isp_range.isp]
+    limit: 500
+    column_limit: 50
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    show_null_points: true
+    interpolation: linear
+    defaults_version: 1
+    listen:
+      Date: htzx_asia_update.time_date
+      Country: geo_ip_country_range.country_iso_code
+      ISP: geo_ip_isp_range.isp
+      Client_ASN: geo_ip_isp_range.asn
+      ClientIP: htzx_asia_update.client_ip
+    row: 135
+    col: 0
+    width: 24
+    height: 8
   filters:
   - name: Date
     title: Date

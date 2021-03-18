@@ -85,6 +85,12 @@ view: htzx_asia_update {
     sql: ${TABLE}.URL ;;
   }
 
+  dimension: downloadspeed_row {
+    type: number
+    sql: if(${usetime}=0,0,${downloadsize}/${usetime});;
+    value_format_name: decimal_2
+  }
+
   dimension: usetime {
     type: number
     sql: ${TABLE}.Usetime ;;
@@ -100,6 +106,7 @@ view: htzx_asia_update {
   #   value_format_name: decimal_2
   # }
 
+
   measure: sum_downloadsize {
     type: sum
     sql: ${downloadsize}/1000 ;;
@@ -108,6 +115,11 @@ view: htzx_asia_update {
   measure: sum_usetime {
     type: sum
     sql: ${usetime}/1000 ;;
+  }
+
+  measure: avg_download_speed {
+    type: average
+    sql: ${downloadspeed_row} ;;
   }
 
 
