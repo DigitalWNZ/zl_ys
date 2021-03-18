@@ -112,6 +112,7 @@ view: htzx_asia_update {
 
 
   measure:downloadsize_by_usetime{
+    label: "downloadsize_by_usetime(KB/S) "
     type: number
     sql: ${sum_downloadsize}/${sum_usetime} ;;
     value_format_name: decimal_2
