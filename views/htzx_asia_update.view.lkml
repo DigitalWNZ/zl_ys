@@ -1,5 +1,5 @@
 view: htzx_asia_update {
-  sql_table_name: `opscenter.network_diagnosis_asia.htzx_asia_update`
+  sql_table_name:@{updateview}
     ;;
 
   dimension: client_ip {
@@ -118,6 +118,7 @@ view: htzx_asia_update {
   }
 
   measure: avg_download_speed {
+    label: "Average Download Speed (KB/S)"
     type: average
     sql: ${downloadspeed_row} ;;
   }

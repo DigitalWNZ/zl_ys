@@ -231,7 +231,12 @@ view: lz_net_dig_test {
   }
 
 
-
+  measure: pert_95 {
+    type: percentile
+    percentile: 95
+    sql: ${average} ;;
+    drill_fields: [client_ip,average]
+  }
   measure: pert_90 {
     type: percentile
     percentile: 90
@@ -277,6 +282,12 @@ view: lz_net_dig_test {
     type: percentile
     percentile: 10
     sql: ${average} ;;
+  }
+
+  measure: avg_average {
+    type: average
+    sql: ${average} ;;
+    value_format_name: decimal_2
   }
 }
 

@@ -21,6 +21,8 @@ explore: geo_ip_isp {}
 
 explore: geo_ip_isp_range {}
 
+
+
 explore: htzx_asia_update {
   sql_always_where:
   (NET.SAFE_IP_FROM_STRING(${client_ip}) BETWEEN ${geo_ip_country_range.start_ip_byte} AND ${geo_ip_country_range.end_ip_byte})
@@ -60,17 +62,9 @@ explore: htzx_asia_update {
   # }
 }
 
-
-# explore: lz_net_dig_test {
-#   join: lz_net_dig_test__tracert {
-#     view_label: "Lznetdigtest: Tracert"
-#     sql: LEFT JOIN UNNEST(${lz_net_dig_test.tracert}) as lz_net_dig_test__tracert ;;
-#     relationship: one_to_many
-#   }
-# }
 explore: lz_net_dig_test_1 {
   view_name: lz_net_dig_test
-  sql_always_where: ${lz_net_dig_test.diagtype} = 1
+  sql_always_where: ${lz_net_dig_test.diagtype} = 1 and ${lz_net_dig_test.average}<=1000
   and (NET.SAFE_IP_FROM_STRING(${client_ip}) BETWEEN ${geo_ip_country_range.start_ip_byte} AND ${geo_ip_country_range.end_ip_byte})
   and (NET.SAFE_IP_FROM_STRING(${client_ip}) BETWEEN ${geo_ip_isp_range.start_ip_byte} AND ${geo_ip_isp_range.end_ip_byte});;
 
@@ -112,7 +106,7 @@ explore: lz_net_dig_test_1 {
 
   explore: lz_net_dig_test_2 {
     view_name: lz_net_dig_test
-    sql_always_where: ${lz_net_dig_test.diagtype} = 1 and ${lz_net_dig_test.average} > 0
+    sql_always_where: ${lz_net_dig_test.diagtype} = 1 and ${lz_net_dig_test.average} > 0 and ${lz_net_dig_test.average}<=1000
     and (NET.SAFE_IP_FROM_STRING(${client_ip}) BETWEEN ${geo_ip_country_range.start_ip_byte} AND ${geo_ip_country_range.end_ip_byte})
     and (NET.SAFE_IP_FROM_STRING(${client_ip}) BETWEEN ${geo_ip_isp_range.start_ip_byte} AND ${geo_ip_isp_range.end_ip_byte});;
     join: geo_ip_country_range {
@@ -149,10 +143,29 @@ explore: lz_net_dig_test_1 {
       # }
     }
 
+explore: lz_net_dig_test_2_1000_plus {
+  view_name: lz_net_dig_test
+  sql_always_where: ${lz_net_dig_test.diagtype} = 1 and ${lz_net_dig_test.average} > 0 and ${lz_net_dig_test.average}>1000
+    and (NET.SAFE_IP_FROM_STRING(${client_ip}) BETWEEN ${geo_ip_country_range.start_ip_byte} AND ${geo_ip_country_range.end_ip_byte})
+    and (NET.SAFE_IP_FROM_STRING(${client_ip}) BETWEEN ${geo_ip_isp_range.start_ip_byte} AND ${geo_ip_isp_range.end_ip_byte});;
+  join: geo_ip_country_range {
+    type: left_outer
+    sql_on:NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${lz_net_dig_test.client_ip}),16) = NET.IP_TRUNC(${geo_ip_country_range.start_ip_byte},16) ;;
+    # or ${lz_net_dig_test.clientIP_byte} BETWEEN ${geo_ip_country_range.start_ip_byte} AND ${geo_ip_country_range.end_ip_byte}  ;;
+    relationship: many_to_one
+  }
+  join: geo_ip_isp_range {
+    type: left_outer
+    sql_on:NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${lz_net_dig_test.client_ip}),16) = NET.IP_TRUNC(${geo_ip_country_range.start_ip_byte},16) ;;
+    # or ${lz_net_dig_test.clientIP_byte} BETWEEN ${geo_ip_isp_range.start_ip_byte} AND ${geo_ip_isp_range.end_ip_byte};;
+    relationship: many_to_one
+  }
+}
+
 explore: lz_net_dig_test_4 {
   view_name: lz_net_dig_test
-  sql_always_where: ${lz_net_dig_test.diagtype} = 4 and ${lz_net_dig_test.average} > 0
-  and (NET.SAFE_IP_FROM_STRING(${client_ip}) BETWEEN NET.SAFE_IP_FROM_STRING(${geo_ip_country_range.start_ip}) AND NET.SAFE_IP_FROM_STRING(${geo_ip_country_range.end_ip})) ;;
+  sql_always_where: ${lz_net_dig_test.diagtype} = 4 and ${lz_net_dig_test.average} > 0 and ${lz_net_dig_test.average}<=1000
+  and (NET.SAFE_IP_FROM_STRING(${client_ip}) BETWEEN NET.SAFE_IP_FROM_STRING(${geo_ip_country_range.start_ip}) AND NET.SAFE_IP_FROM_STRING(${geo_ip_country_range.end_ip}));;
 
   join: geo_ip_country_range {
     type: left_outer
@@ -187,6 +200,8 @@ explore: lz_net_dig_test_4 {
     #   relationship: many_to_one
     # }
   }
+
+explore: lz_net_dig_test_4_above_95 {}
 
     explore: first_2_Hop {
       sql_always_where: ${Delay1} is not null and ${Delay0} is not null
