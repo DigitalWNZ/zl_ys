@@ -490,3 +490,80 @@ explore: lz_net_dig_test_4_above_95 {}
           relationship: many_to_one
         }
       }
+
+explore: cdn_transform {
+  sql_always_where:NET.SAFE_IP_FROM_STRING(${cdn_transform.remote_ip}) BETWEEN NET.SAFE_IP_FROM_STRING(${geo_ip_country_range.start_ip}) AND NET.SAFE_IP_FROM_STRING(${geo_ip_country_range.end_ip})
+  and NET.SAFE_IP_FROM_STRING(${cdn_transform.remote_ip}) BETWEEN NET.SAFE_IP_FROM_STRING(${geo_ip_isp_range.start_ip}) AND NET.SAFE_IP_FROM_STRING(${geo_ip_isp_range.end_ip})
+      ;;
+  join: geo_ip_country_range {
+    type: left_outer
+    sql_on: NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${cdn_transform.remote_ip}),16) = NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${geo_ip_country_range.start_ip}),16) ;;
+    relationship: many_to_one
+  }
+  join: geo_ip_isp_range {
+    type: left_outer
+    sql_on: NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${cdn_transform.remote_ip}),16) = NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${geo_ip_isp_range.start_ip}),16) ;;
+    relationship: many_to_one
+  }
+
+}
+
+
+explore: retention_interval {
+  sql_always_where:NET.SAFE_IP_FROM_STRING(${retention_interval.remote_ip}) BETWEEN NET.SAFE_IP_FROM_STRING(${geo_ip_country_range.start_ip}) AND NET.SAFE_IP_FROM_STRING(${geo_ip_country_range.end_ip})
+  and NET.SAFE_IP_FROM_STRING(${retention_interval.remote_ip}) BETWEEN NET.SAFE_IP_FROM_STRING(${geo_ip_isp_range.start_ip}) AND NET.SAFE_IP_FROM_STRING(${geo_ip_isp_range.end_ip});;
+  join: geo_ip_country_range {
+    type: left_outer
+    sql_on: NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${retention_interval.remote_ip}),16) = NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${geo_ip_country_range.start_ip}),16) ;;
+    relationship: many_to_one
+  }
+  join: geo_ip_isp_range {
+    type: left_outer
+    sql_on: NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${retention_interval.remote_ip}),16) = NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${geo_ip_isp_range.start_ip}),16) ;;
+    relationship: many_to_one
+  }
+  # join: ip_asn {
+  #   type: left_outer
+  #   sql_on: NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${retention_interval.remote_ip}),16) = NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${ip_asn.start_ip}),16) ;;
+  #   relationship: many_to_one
+  # }
+
+}
+
+explore: cdnlog {
+  join: cdnlog__resource {
+    view_label: "Cdnlog: Resource"
+    sql: LEFT JOIN UNNEST([${cdnlog.resource}]) as cdnlog__resource ;;
+    relationship: one_to_one
+  }
+
+  join: cdnlog__resource__labels {
+    view_label: "Cdnlog: Resource Labels"
+    sql: LEFT JOIN UNNEST([${cdnlog__resource.labels}]) as cdnlog__resource__labels ;;
+    relationship: one_to_one
+  }
+
+  join: cdnlog__jsonpayload_type_loadbalancerlogentry {
+    view_label: "Cdnlog: Jsonpayload Type Loadbalancerlogentry"
+    sql: LEFT JOIN UNNEST([${cdnlog.jsonpayload_type_loadbalancerlogentry}]) as cdnlog__jsonpayload_type_loadbalancerlogentry ;;
+    relationship: one_to_one
+  }
+
+  join: cdnlog__http_request {
+    view_label: "Cdnlog: Httprequest"
+    sql: LEFT JOIN UNNEST([${cdnlog.http_request}]) as cdnlog__http_request ;;
+    relationship: one_to_one
+  }
+
+  join: cdnlog__source_location {
+    view_label: "Cdnlog: Sourcelocation"
+    sql: LEFT JOIN UNNEST([${cdnlog.source_location}]) as cdnlog__source_location ;;
+    relationship: one_to_one
+  }
+
+  join: cdnlog__operation {
+    view_label: "Cdnlog: Operation"
+    sql: LEFT JOIN UNNEST([${cdnlog.operation}]) as cdnlog__operation ;;
+    relationship: one_to_one
+  }
+}

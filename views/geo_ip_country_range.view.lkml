@@ -4,6 +4,7 @@ view: geo_ip_country_range {
 
   dimension: country_iso_code {
     type: string
+    map_layer_name: countries
     sql: ${TABLE}.country_iso_code ;;
   }
 
