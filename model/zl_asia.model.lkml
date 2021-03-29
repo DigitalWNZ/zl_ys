@@ -145,7 +145,7 @@ explore: lz_net_dig_test_1 {
 
 explore: lz_net_dig_test_2_1000_plus {
   view_name: lz_net_dig_test
-  sql_always_where: ${lz_net_dig_test.diagtype} = 1 and ${lz_net_dig_test.average} > 0 and ${lz_net_dig_test.average}>1000
+  sql_always_where: (${lz_net_dig_test.diagtype} = 1 or ${lz_net_dig_test.diagtype} =4) and ${lz_net_dig_test.average} > 0 and ${lz_net_dig_test.average}>1000
     and (NET.SAFE_IP_FROM_STRING(${client_ip}) BETWEEN ${geo_ip_country_range.start_ip_byte} AND ${geo_ip_country_range.end_ip_byte})
     and (NET.SAFE_IP_FROM_STRING(${client_ip}) BETWEEN ${geo_ip_isp_range.start_ip_byte} AND ${geo_ip_isp_range.end_ip_byte});;
   join: geo_ip_country_range {

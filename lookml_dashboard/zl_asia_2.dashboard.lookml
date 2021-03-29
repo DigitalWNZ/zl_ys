@@ -267,7 +267,8 @@
     explore: lz_net_dig_test_2_1000_plus
     type: looker_grid
     fields: [geo_ip_country_range.country_iso_code, geo_ip_isp_range.isp, geo_ip_isp_range.asn,
-      lz_net_dig_test.client_ip, lz_net_dig_test.name, lz_net_dig_test.user_id, lz_net_dig_test.average]
+      lz_net_dig_test.client_ip, lz_net_dig_test.name, lz_net_dig_test.user_id, lz_net_dig_test.average,
+      lz_net_dig_test.diagtype]
     sorts: [geo_ip_country_range.country_iso_code]
     limit: 500
     show_view_names: false
