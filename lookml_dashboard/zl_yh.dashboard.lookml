@@ -8,10 +8,10 @@
     model: zl_asia
     explore: lz_net_dig_test_yh
     type: looker_column
-    fields: [geo_ip_isp_range.isp, lz_net_dig_test.pert_90]
+    fields: [geo_ip_isp_range.isp_yh, lz_net_dig_test.pert_90_yh]
     filters:
       lz_net_dig_test.timekey_time: 5 days
-    sorts: [lz_net_dig_test.pert_90 desc]
+    sorts: [lz_net_dig_test.pert_90_yh desc]
     limit: 500
     query_timezone: UTC
     x_axis_gridlines: false

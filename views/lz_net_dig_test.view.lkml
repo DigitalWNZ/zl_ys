@@ -250,6 +250,19 @@ view: lz_net_dig_test {
     sql: ${average} ;;
     drill_fields: [client_ip,average]
   }
+
+  measure: pert_90_yh {
+    type: percentile
+    percentile: 90
+    sql: ${average} ;;
+    html:
+    <br>P90: {{value}} </br>
+    <br># of records: {{count._rendered_value}}</br>
+    <br># of distince IP {{count_distinct_ip._rendered_value}}</br>
+    ;;
+    drill_fields: [client_ip,average]
+  }
+
   measure: pert_80 {
     type: percentile
     percentile: 80
