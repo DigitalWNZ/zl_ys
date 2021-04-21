@@ -31,6 +31,12 @@ view: geo_ip_isp_range {
     sql: ${TABLE}.isp ;;
   }
 
+  dimension: isp_yh {
+    type: string
+    sql: ${TABLE}.isp ;;
+    html: isp: {{value}}  asn:{{asn._rendered_value}} ;;
+  }
+
   dimension: network {
     type: string
     sql: ${TABLE}.network ;;
