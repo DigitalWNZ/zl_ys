@@ -7,6 +7,12 @@ view: geo_ip_isp_range {
     sql: ${TABLE}.asn ;;
   }
 
+  dimension: asn_yh {
+    type: string
+    sql: ${TABLE}.asn ;;
+    # html: asn:{{value}} isp: {{isp._rendered_value}};;
+  }
+
   dimension: aso {
     type: string
     sql: ${TABLE}.aso ;;
