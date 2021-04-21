@@ -122,6 +122,13 @@ view: lz_net_dig_test {
     sql: timestamp(${TABLE}.time);;
   }
 
+  # dimension_group: time {
+  #   type: time
+  #   timeframes: [raw, time, date, hour,hour_of_day, day_of_week,
+  #     day_of_week_index, time_of_day, week,month_num, month, year, quarter,quarter_of_year]
+  #   sql: timestamp(FORMAT_TIMESTAMP('%F %H:%M:%E*S', timestamp(${TABLE}.time), 'Asia/Shanghai'));;
+  # }
+
   dimension_group: timekey {
     type: time
     timeframes: [time]

@@ -201,6 +201,25 @@ explore: lz_net_dig_test_4 {
     # }
   }
 
+
+explore: lz_net_dig_test_yh {
+  view_name: lz_net_dig_test
+  sql_always_where: ${lz_net_dig_test.diagtype} = 4 and ${lz_net_dig_test.average} > 0 and ${lz_net_dig_test.average}<=1000
+    and (NET.SAFE_IP_FROM_STRING(${client_ip}) BETWEEN NET.SAFE_IP_FROM_STRING(${geo_ip_country_range.start_ip}) AND NET.SAFE_IP_FROM_STRING(${geo_ip_country_range.end_ip}))
+    and (NET.SAFE_IP_FROM_STRING(${client_ip}) BETWEEN NET.SAFE_IP_FROM_STRING(${geo_ip_isp_range.start_ip}) AND NET.SAFE_IP_FROM_STRING(${geo_ip_isp_range.end_ip}));;
+
+  join: geo_ip_country_range {
+    type: left_outer
+    sql_on: NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${lz_net_dig_test.client_ip}),16) = NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${geo_ip_country_range.start_ip}),16) ;;
+    relationship: many_to_one
+  }
+  join: geo_ip_isp_range {
+    type: left_outer
+    sql_on: NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${lz_net_dig_test.client_ip}),16) = NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${geo_ip_isp_range.start_ip}),16) ;;
+    relationship: many_to_one
+  }
+}
+
 explore: lz_net_dig_test_4_above_95 {}
 
     explore: first_2_Hop {
