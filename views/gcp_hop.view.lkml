@@ -106,6 +106,12 @@ dimension: asn_isp_peer {
   sql: concat("Client ASN:",${geo_ip_isp_range.asn},",ISP:",${geo_ip_isp_range.isp},",GCP_Peer_ASN:",${gcp_peer_asn},",GCP_Peer_Metro:",${Metro},".") ;;
 }
 
+
+  dimension: asn_isp_peer_0422 {
+    type: string
+    sql: concat("Client ASN:",${geo_ip_isp_mask.asn},",ISP:",${geo_ip_isp_mask.isp},",GCP_Peer_ASN:",${gcp_peer_asn},",GCP_Peer_Metro:",${Metro},".") ;;
+  }
+
 dimension: max_delay_hop {
   type: string
   sql: ${TABLE}.max_delay_hop;;

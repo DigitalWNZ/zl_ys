@@ -475,29 +475,6 @@ explore: lz_net_dig_test_4_above_95 {}
       explore: stat_from_cdn {
         sql_always_where:(NET.SAFE_IP_FROM_STRING(${remote_ip}) BETWEEN NET.SAFE_IP_FROM_STRING(${geo_ip_country_range.start_ip}) AND NET.SAFE_IP_FROM_STRING(${geo_ip_country_range.end_ip}))
           and (NET.SAFE_IP_FROM_STRING(${remote_ip}) BETWEEN NET.SAFE_IP_FROM_STRING(${geo_ip_isp_range.start_ip}) AND NET.SAFE_IP_FROM_STRING(${geo_ip_isp_range.end_ip}));;
-        # join: geo_ip_country_range {
-        #   type: left_outer
-        #   sql_on:NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${stat_from_cdn.remote_ip}),16) = NET.IP_TRUNC(${geo_ip_country_range.start_ip_byte},16) ;;
-        #   # or ${lz_net_dig_test.clientIP_byte} BETWEEN ${geo_ip_country_range.start_ip_byte} AND ${geo_ip_country_range.end_ip_byte}  ;;
-        #   relationship: many_to_one
-        # }
-        # join: geo_ip_isp_range {
-        #   type: left_outer
-        #   sql_on:NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${stat_from_cdn.remote_ip}),16) = NET.IP_TRUNC(${geo_ip_country_range.start_ip_byte},16) ;;
-        #   # or ${lz_net_dig_test.clientIP_byte} BETWEEN ${geo_ip_isp_range.start_ip_byte} AND ${geo_ip_isp_range.end_ip_byte};;
-        #   relationship: many_to_one
-        # }
-        # join: geo_ip_country_range {
-        #   type: inner
-        #   sql_on:NET.SAFE_IP_FROM_STRING(${stat_from_cdn.remote_ip}) BETWEEN NET.SAFE_IP_FROM_STRING(${geo_ip_country_range.start_ip}) AND NET.SAFE_IP_FROM_STRING(${geo_ip_country_range.end_ip})  ;;
-        #   relationship: many_to_one
-        # }
-        # join: geo_ip_isp_range {
-        #   type: inner
-        #   sql_on: NET.SAFE_IP_FROM_STRING(${stat_from_cdn.remote_ip}) BETWEEN NET.SAFE_IP_FROM_STRING(${geo_ip_isp_range.start_ip}) AND NET.SAFE_IP_FROM_STRING(${geo_ip_isp_range.end_ip}) ;;
-        #   relationship: many_to_one
-        # }
-
         join: geo_ip_country_range {
           type: left_outer
           sql_on: NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${stat_from_cdn.remote_ip}),16) = NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${geo_ip_country_range.start_ip}),16) ;;
@@ -541,12 +518,6 @@ explore: retention_interval {
     sql_on: NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${retention_interval.remote_ip}),16) = NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${geo_ip_isp_range.start_ip}),16) ;;
     relationship: many_to_one
   }
-  # join: ip_asn {
-  #   type: left_outer
-  #   sql_on: NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${retention_interval.remote_ip}),16) = NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${ip_asn.start_ip}),16) ;;
-  #   relationship: many_to_one
-  # }
-
 }
 
 explore: cdnlog {
