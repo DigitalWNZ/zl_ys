@@ -9,7 +9,8 @@
     explore: gcp_hop_dive
     type: looker_column
     fields: [gcp_hop_dive.metro, gcp_hop_dive.delay_gcp_95]
-    filters: {}
+    filters:
+      geo_ip_isp_mask.isp: ''
     sorts: [gcp_hop_dive.delay_gcp_95 desc]
     limit: 500
     query_timezone: UTC
@@ -42,7 +43,7 @@
     totals_color: "#808080"
     defaults_version: 1
     listen:
-      ISP: geo_ip_isp_mask.isp
+      ISP: geo_ip_isp_mask.isp_yh_1
     row: 0
     col: 0
     width: 24
@@ -99,7 +100,7 @@
     defaults_version: 1
     series_types: {}
     listen:
-      ISP: geo_ip_isp_mask.isp
+      ISP: geo_ip_isp_mask.isp_yh_1
     row: 9
     col: 0
     width: 24
@@ -118,4 +119,4 @@
     model: zl_asia_0422
     explore: gcp_hop_dive
     listens_to_filters: []
-    field: geo_ip_isp_mask.isp
+    field: geo_ip_isp_mask.isp_yh_1

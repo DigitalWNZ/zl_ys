@@ -49,7 +49,7 @@ view: geo_ip_isp_mask {
     drill_fields: [network]
     link: {
       label: "Drill to Metro"
-      url: "/dashboards/1052?ISP={{ value }}"
+      url: "/dashboards/1052?ISP=\"{{value}}\""
     }
   }
 
