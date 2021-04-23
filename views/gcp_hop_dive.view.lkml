@@ -42,6 +42,10 @@ view: gcp_hop_dive {
   dimension: metro {
     type: string
     sql: ${TABLE}.Metro ;;
+    drill_fields: [client_ip]
+    link: {
+      label: "Drill to ISP"
+      url: "/dashboards/1054?Metro={{ value }}"}
   }
 
   measure: delay_gcp_95 {

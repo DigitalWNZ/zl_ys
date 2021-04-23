@@ -43,6 +43,16 @@ view: geo_ip_isp_mask {
     html: isp: {{value}}  asn:{{asn._rendered_value}} cidr:{{network._rendered_value}} ;;
   }
 
+  dimension: isp_yh_1 {
+    type: string
+    sql: ${TABLE}.isp ;;
+    drill_fields: [network]
+    link: {
+      label: "Drill to Metro"
+      url: "/dashboards/1052?ISP={{ value }}"
+    }
+  }
+
   dimension: network {
     type: string
     sql: ${TABLE}.network ;;

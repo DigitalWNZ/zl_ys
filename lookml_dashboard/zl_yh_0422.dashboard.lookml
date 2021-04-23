@@ -238,7 +238,7 @@
     model: zl_asia_0422
     explore: gcp_hop_dive
     type: looker_column
-    fields: [gcp_hop_dive.delay_gcp_95, geo_ip_isp_mask.isp_yh]
+    fields: [gcp_hop_dive.delay_gcp_95, geo_ip_isp_mask.isp_yh_1]
     sorts: [gcp_hop_dive.delay_gcp_95 desc]
     limit: 500
     column_limit: 50
