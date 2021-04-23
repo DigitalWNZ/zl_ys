@@ -17,9 +17,11 @@ view: gcp_hop_dive {
     sql: ${TABLE}.clientIP ;;
   }
 
-  dimension: time {
-    type: string
-    sql: ${TABLE}.Time ;;
+  dimension_group: time {
+    type: time
+    timeframes: [raw, time, date, hour,hour_of_day, day_of_week,
+      day_of_week_index, time_of_day, week,month_num, month, year, quarter,quarter_of_year]
+    sql: timestamp(${TABLE}.Time) ;;
   }
 
   dimension: hop_gcp {
@@ -57,7 +59,7 @@ view: gcp_hop_dive {
   set: detail {
     fields: [
       client_ip,
-      time,
+      time_time,
       hop_gcp,
       delay_gcp,
       gcp_peer_asn,
