@@ -40,7 +40,7 @@ view: geo_ip_isp_mask {
   dimension: isp_yh {
     type: string
     sql: ${TABLE}.isp ;;
-    html: isp: {{value}}  asn:{{asn._rendered_value}} ;;
+    html: isp: {{value}}  asn:{{asn._rendered_value}} cidr:{{network._rendered_value}} ;;
   }
 
   dimension: network {

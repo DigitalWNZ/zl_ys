@@ -297,6 +297,28 @@ explore: htzx_asia_update {
 
           }
 
+explore: gcp_hop_dive {
+  sql_always_where:BYTE_LENGTH(NET.SAFE_IP_FROM_STRING(${gcp_hop_dive.client_ip})) = 4;;
+  always_join: [dummy,geo_ip_country_mask,geo_ip_isp_mask]
+  join: dummy {
+    sql: ,unnest(GENERATE_ARRAY(9,32)) mask;;
+  }
+  join: geo_ip_country_mask {
+    type: inner
+    sql_on: NET.SAFE_IP_FROM_STRING(${gcp_hop_dive.client_ip}) & NET.IP_NET_MASK(4, mask) = ${geo_ip_country_mask.network_bin} and mask=${geo_ip_country_mask.mask};;
+    relationship: many_to_one
+  }
+  join: geo_ip_isp_mask {
+    type: inner
+    sql_on: NET.SAFE_IP_FROM_STRING(${gcp_hop_dive.client_ip}) & NET.IP_NET_MASK(4, mask) = ${geo_ip_isp_mask.network_bin} and mask=${geo_ip_isp_mask.mask};;
+    relationship: many_to_one
+  }
+}
+
+explore: gcp_hop_dive_base {
+  view_name: gcp_hop_dive
+}
+
           explore: hop_by_ip {
             view_name: first_2_Hop
             sql_always_where:BYTE_LENGTH(NET.SAFE_IP_FROM_STRING(${first_2_Hop.client_ip})) = 4;;
