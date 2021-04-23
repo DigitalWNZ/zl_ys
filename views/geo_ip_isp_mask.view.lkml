@@ -45,11 +45,11 @@ view: geo_ip_isp_mask {
 
   dimension: isp_yh_1 {
     type: string
-    sql: ${TABLE}.isp ;;
+    sql: replace(${TABLE}.isp,'"','');;
     drill_fields: [network]
     link: {
       label: "Drill to Metro"
-      url: "/dashboards/1052?ISP=\"{{value}}\""
+      url: "/dashboards/1052?ISP={{value}}"
     }
   }
 
