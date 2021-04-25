@@ -44,6 +44,11 @@
     defaults_version: 1
     listen:
       ISP: geo_ip_isp_mask.isp_yh_1
+      Time Time: gcp_hop_dive.time_time
+      Country Iso Code: geo_ip_country_mask.country_iso_code
+      Asn: geo_ip_isp_mask.asn
+      Metro: gcp_hop_dive.metro
+      Diff Asn (Yes / No): gcp_hop_dive.diff_asn
     row: 0
     col: 0
     width: 24
@@ -101,11 +106,44 @@
     series_types: {}
     listen:
       ISP: geo_ip_isp_mask.isp_yh_1
+      Time Time: gcp_hop_dive.time_time
+      Country Iso Code: geo_ip_country_mask.country_iso_code
+      Asn: geo_ip_isp_mask.asn
+      Metro: gcp_hop_dive.metro
+      Diff Asn (Yes / No): gcp_hop_dive.diff_asn
     row: 9
     col: 0
     width: 24
     height: 10
   filters:
+  - name: Time Time
+    title: Time Time
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: advanced
+      display: popover
+      options: []
+    model: zl_asia_0422
+    explore: gcp_hop_dive
+    listens_to_filters: []
+    field: gcp_hop_dive.time_time
+  - name: Country Iso Code
+    title: Country Iso Code
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: tag_list
+      display: popover
+      options: []
+    model: zl_asia_0422
+    explore: gcp_hop_dive
+    listens_to_filters: []
+    field: geo_ip_country_mask.country_iso_code
   - name: ISP
     title: ISP
     type: field_filter
@@ -120,3 +158,45 @@
     explore: gcp_hop_dive
     listens_to_filters: []
     field: geo_ip_isp_mask.isp_yh_1
+  - name: Asn
+    title: Asn
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: tag_list
+      display: popover
+      options: []
+    model: zl_asia_0422
+    explore: gcp_hop_dive
+    listens_to_filters: []
+    field: geo_ip_isp_mask.asn
+  - name: Metro
+    title: Metro
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: tag_list
+      display: popover
+      options: []
+    model: zl_asia_0422
+    explore: gcp_hop_dive
+    listens_to_filters: []
+    field: gcp_hop_dive.metro
+  - name: Diff Asn (Yes / No)
+    title: Diff Asn (Yes / No)
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: checkboxes
+      display: inline
+      options: []
+    model: zl_asia_0422
+    explore: gcp_hop_dive
+    listens_to_filters: []
+    field: gcp_hop_dive.diff_asn

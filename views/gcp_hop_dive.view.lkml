@@ -26,7 +26,7 @@ view: gcp_hop_dive {
     type: time
     timeframes: [raw, time, date, hour,hour_of_day, day_of_week,
       day_of_week_index, time_of_day, week,month_num, month, year, quarter,quarter_of_year]
-    sql: timestamp(${TABLE}.Time) ;;
+    sql: safe_cast(${TABLE}.Time as timestamp) ;;
   }
 
   dimension: hop_gcp {
@@ -50,7 +50,9 @@ view: gcp_hop_dive {
     drill_fields: [client_ip]
     link: {
       label: "Drill to ISP"
-      url: "/dashboards/1054?Metro={{ value }}"}
+      url: "/dashboards/1054?Metro={{ value }}&Time+Time={{_filters['gcp_hop_dive.time_time'] | url_encode}}&Country+Iso+Code={{_filters['geo_ip_country_mask.country_iso_code'] | url_encode}}&ISP={{ _filters['geo_ip_isp_mask.isp'] | url_encode }}&Asn={{ _filters['geo_ip_isp_mask.asn'] | url_encode }}&Diff+Asn+%28Yes+%2F+No%29={{ _filters['gcp_hop_dive.diff_asn'] | url_encode }}"
+      }
+
   }
 
   dimension: diff_asn {
