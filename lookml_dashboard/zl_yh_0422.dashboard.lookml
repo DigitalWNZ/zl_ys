@@ -421,11 +421,11 @@
   - name: Diff Asn (Yes / No)
     title: Diff Asn (Yes / No)
     type: field_filter
-    default_value: 'Yes'
+    default_value: ''
     allow_multiple_values: true
     required: false
     ui_config:
-      type: button_toggles
+      type: checkboxes
       display: inline
       options: []
     model: zl_asia_0422
