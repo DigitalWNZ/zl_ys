@@ -53,6 +53,11 @@ view: gcp_hop_dive {
       url: "/dashboards/1054?Metro={{ value }}"}
   }
 
+  dimension: diff_asn {
+    type: yesno
+    sql: ${gcp_peer_asn}=${geo_ip_isp_mask.asn};;
+  }
+
   measure: delay_gcp_95 {
     type: percentile
     percentile: 95

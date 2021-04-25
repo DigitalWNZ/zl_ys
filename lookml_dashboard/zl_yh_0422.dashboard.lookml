@@ -161,6 +161,7 @@
       ISP: geo_ip_isp_mask.isp
       Asn: geo_ip_isp_mask.asn
       Metro: gcp_hop_dive.metro
+      Diff Asn (Yes / No): gcp_hop_dive.diff_asn
     row: 37
     col: 0
     width: 24
@@ -229,6 +230,7 @@
       ISP: geo_ip_isp_mask.isp
       Asn: geo_ip_isp_mask.asn
       Metro: gcp_hop_dive.metro
+      Diff Asn (Yes / No): gcp_hop_dive.diff_asn
     row: 19
     col: 0
     width: 24
@@ -297,6 +299,7 @@
       ISP: geo_ip_isp_mask.isp
       Asn: geo_ip_isp_mask.asn
       Metro: gcp_hop_dive.metro
+      Diff Asn (Yes / No): gcp_hop_dive.diff_asn
     row: 28
     col: 0
     width: 24
@@ -309,12 +312,12 @@
     fields: [geo_ip_country_mask.country_iso_code, geo_ip_isp_mask.isp_yh, geo_ip_isp_mask.asn,
       first_2_Hop.client_ip, first_2_Hop.name, first_2_Hop.User_ID, first_2_Hop.Hop0,
       first_2_Hop.Delay0, first_2_Hop.Hop1, first_2_Hop.Delay1, gcp_hop_dive.hop_gcp,
-      gcp_hop_dive.delay_gcp, gcp_hop_dive.gcp_peer_asn, gcp_hop_dive.metro]
+      gcp_hop_dive.delay_gcp, gcp_hop_dive.gcp_peer_asn, gcp_hop_dive.metro, gcp_hop_dive.diff_asn]
     sorts: [geo_ip_country_mask.country_iso_code]
     limit: 500
     dynamic_fields: [{_kind_hint: dimension, table_calculation: diff_asn, _type_hint: number,
         category: table_calculation, expression: 'if(${geo_ip_isp_mask.asn}!=${gcp_hop_dive.gcp_peer_asn},1,0)',
-        label: diff_asn, value_format: !!null '', value_format_name: !!null ''}]
+        label: diff_asn, value_format: !!null '', value_format_name: !!null '', is_disabled: true}]
     query_timezone: UTC
     show_view_names: false
     show_row_numbers: true
@@ -339,6 +342,7 @@
       ISP: geo_ip_isp_mask.isp
       Asn: geo_ip_isp_mask.asn
       Metro: gcp_hop_dive.metro
+      Diff Asn (Yes / No): gcp_hop_dive.diff_asn
     row: 45
     col: 0
     width: 24
@@ -414,3 +418,17 @@
     explore: gcp_hop_dive
     listens_to_filters: []
     field: gcp_hop_dive.metro
+  - name: Diff Asn (Yes / No)
+    title: Diff Asn (Yes / No)
+    type: field_filter
+    default_value: 'Yes'
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: button_toggles
+      display: inline
+      options: []
+    model: zl_asia_0422
+    explore: gcp_hop_dive
+    listens_to_filters: []
+    field: gcp_hop_dive.diff_asn
