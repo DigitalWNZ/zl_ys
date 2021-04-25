@@ -62,8 +62,8 @@
     interpolation: linear
     defaults_version: 1
     listen:
-      Country Iso Code: geo_ip_country_mask.country_iso_code
       Time Time: lz_net_dig_test.time_time
+      Country Iso Code: geo_ip_country_mask.country_iso_code
       ISP: geo_ip_isp_mask.isp
       Asn: geo_ip_isp_mask.asn
     row: 0
@@ -108,8 +108,8 @@
     totals_color: "#808080"
     defaults_version: 1
     listen:
-      Country Iso Code: geo_ip_country_mask.country_iso_code
       Time Time: lz_net_dig_test.time_time
+      Country Iso Code: geo_ip_country_mask.country_iso_code
       ISP: geo_ip_isp_mask.isp
       Asn: geo_ip_isp_mask.asn
     row: 10
@@ -156,8 +156,8 @@
     series_types: {}
     defaults_version: 1
     listen:
+      Time Time: gcp_hop_dive.time_time
       Country Iso Code: geo_ip_country_mask.country_iso_code
-      Time Time: gcp_hop_dive.time
       ISP: geo_ip_isp_mask.isp
       Asn: geo_ip_isp_mask.asn
       Metro: gcp_hop_dive.metro
@@ -224,8 +224,8 @@
     defaults_version: 1
     series_types: {}
     listen:
+      Time Time: gcp_hop_dive.time_time
       Country Iso Code: geo_ip_country_mask.country_iso_code
-      Time Time: gcp_hop_dive.time
       ISP: geo_ip_isp_mask.isp
       Asn: geo_ip_isp_mask.asn
       Metro: gcp_hop_dive.metro
@@ -292,8 +292,8 @@
     defaults_version: 1
     series_types: {}
     listen:
+      Time Time: gcp_hop_dive.time_time
       Country Iso Code: geo_ip_country_mask.country_iso_code
-      Time Time: gcp_hop_dive.time
       ISP: geo_ip_isp_mask.isp
       Asn: geo_ip_isp_mask.asn
       Metro: gcp_hop_dive.metro
@@ -301,6 +301,48 @@
     col: 0
     width: 24
     height: 9
+  - title: Hop_by_id_dive
+    name: Hop_by_id_dive
+    model: zl_asia_0422
+    explore: hop_by_ip_yh
+    type: looker_grid
+    fields: [geo_ip_country_mask.country_iso_code, geo_ip_isp_mask.isp_yh, geo_ip_isp_mask.asn,
+      first_2_Hop.client_ip, first_2_Hop.name, first_2_Hop.User_ID, first_2_Hop.Hop0,
+      first_2_Hop.Delay0, first_2_Hop.Hop1, first_2_Hop.Delay1, gcp_hop_dive.hop_gcp,
+      gcp_hop_dive.delay_gcp, gcp_hop_dive.gcp_peer_asn, gcp_hop_dive.metro]
+    sorts: [geo_ip_country_mask.country_iso_code]
+    limit: 500
+    dynamic_fields: [{_kind_hint: dimension, table_calculation: diff_asn, _type_hint: number,
+        category: table_calculation, expression: 'if(${geo_ip_isp_mask.asn}!=${gcp_hop_dive.gcp_peer_asn},1,0)',
+        label: diff_asn, value_format: !!null '', value_format_name: !!null ''}]
+    query_timezone: UTC
+    show_view_names: false
+    show_row_numbers: true
+    transpose: false
+    truncate_text: true
+    hide_totals: false
+    hide_row_totals: false
+    size_to_fit: true
+    table_theme: white
+    limit_displayed_rows: false
+    enable_conditional_formatting: false
+    header_text_alignment: left
+    header_font_size: 12
+    rows_font_size: 12
+    conditional_formatting_include_totals: false
+    conditional_formatting_include_nulls: false
+    series_types: {}
+    defaults_version: 1
+    listen:
+      Time Time: gcp_hop_dive.time_time
+      Country Iso Code: geo_ip_country_mask.country_iso_code
+      ISP: geo_ip_isp_mask.isp
+      Asn: geo_ip_isp_mask.asn
+      Metro: gcp_hop_dive.metro
+    row: 45
+    col: 0
+    width: 24
+    height: 13
   filters:
   - name: Time Time
     title: Time Time
