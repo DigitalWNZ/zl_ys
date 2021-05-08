@@ -215,21 +215,32 @@ explore: htzx_asia_update {
         sql_on: NET.SAFE_IP_FROM_STRING(${lz_net_dig_test.client_ip}) & NET.IP_NET_MASK(4, mask) = ${geo_ip_isp_mask.network_bin} and mask=${geo_ip_isp_mask.mask};;
         relationship: many_to_one
       }
-      # sql_always_where: ${lz_net_dig_test.diagtype} = 4 and ${lz_net_dig_test.average} > 0 and ${lz_net_dig_test.average}<=1000
-      #       and (NET.SAFE_IP_FROM_STRING(${client_ip}) BETWEEN NET.SAFE_IP_FROM_STRING(${geo_ip_country_range.start_ip}) AND NET.SAFE_IP_FROM_STRING(${geo_ip_country_range.end_ip}))
-      #       and (NET.SAFE_IP_FROM_STRING(${client_ip}) BETWEEN NET.SAFE_IP_FROM_STRING(${geo_ip_isp_range.start_ip}) AND NET.SAFE_IP_FROM_STRING(${geo_ip_isp_range.end_ip}));;
-
-      #   join: geo_ip_country_range {
-      #     type: left_outer
-      #     sql_on: NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${lz_net_dig_test.client_ip}),16) = NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${geo_ip_country_range.start_ip}),16) ;;
-      #     relationship: many_to_one
-      #   }
-      #   join: geo_ip_isp_range {
-      #     type: left_outer
-      #     sql_on: NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${lz_net_dig_test.client_ip}),16) = NET.IP_TRUNC(NET.SAFE_IP_FROM_STRING(${geo_ip_isp_range.start_ip}),16) ;;
-      #     relationship: many_to_one
-      #   }
       }
+
+explore: lz_net_dig_test_yh_route {
+  view_name: lz_net_dig_test
+  sql_always_where:BYTE_LENGTH(NET.SAFE_IP_FROM_STRING(${lz_net_dig_test.client_ip})) = 4 and BYTE_LENGTH(NET.SAFE_IP_FROM_STRING(${lz_net_dig_test.target})) = 4
+  and ${lz_net_dig_test.diagtype} = 1;;
+  always_join: [dummy]
+  join: dummy {
+    sql: ,unnest(GENERATE_ARRAY(9,32)) mask;;
+  }
+  join: geo_ip_country_mask {
+    type: inner
+    sql_on: NET.SAFE_IP_FROM_STRING(${lz_net_dig_test.client_ip}) & NET.IP_NET_MASK(4, mask) = ${geo_ip_country_mask.network_bin} and mask=${geo_ip_country_mask.mask};;
+    relationship: many_to_one
+  }
+  join: geo_ip_isp_mask {
+    type: inner
+    sql_on: NET.SAFE_IP_FROM_STRING(${lz_net_dig_test.client_ip}) & NET.IP_NET_MASK(4, mask) = ${geo_ip_isp_mask.network_bin} and mask=${geo_ip_isp_mask.mask};;
+    relationship: many_to_one
+  }
+  join: gcp_ip_range_mask {
+    type: left_outer
+    sql_on: NET.SAFE_IP_FROM_STRING(${lz_net_dig_test.target}) & NET.IP_NET_MASK(4, mask) = ${gcp_ip_range_mask.network_bin} and mask=${gcp_ip_range_mask.mask} ;;
+    relationship: many_to_one
+  }
+}
 
       explore: lz_net_dig_test_4_above_95 {}
 
@@ -406,6 +417,35 @@ explore: hop_by_ip_yh {
   #   # or ${lz_net_dig_test.clientIP_byte} BETWEEN ${geo_ip_isp_range.start_ip_byte} AND ${geo_ip_isp_range.end_ip_byte};;
   #   relationship: many_to_one
   # }
+}
+
+explore: hop_by_ip_yh_route {
+  view_name: first_2_Hop
+  sql_always_where:BYTE_LENGTH(NET.SAFE_IP_FROM_STRING(${first_2_Hop.client_ip})) = 4 and BYTE_LENGTH(NET.SAFE_IP_FROM_STRING(${first_2_Hop.target})) = 4 ;;
+  always_join: [dummy]
+  join: gcp_hop_dive {
+    type: left_outer
+    sql_on: ${first_2_Hop.insert_id}=${gcp_hop_dive.insert_id} ;;
+    relationship: one_to_one
+  }
+  join: dummy {
+    sql: ,unnest(GENERATE_ARRAY(9,32)) mask;;
+  }
+  join: geo_ip_country_mask {
+    type: inner
+    sql_on: NET.SAFE_IP_FROM_STRING(${first_2_Hop.client_ip}) & NET.IP_NET_MASK(4, mask) = ${geo_ip_country_mask.network_bin} and mask=${geo_ip_country_mask.mask};;
+    relationship: many_to_one
+  }
+  join: geo_ip_isp_mask {
+    type: inner
+    sql_on: NET.SAFE_IP_FROM_STRING(${first_2_Hop.client_ip}) & NET.IP_NET_MASK(4, mask) = ${geo_ip_isp_mask.network_bin} and mask=${geo_ip_isp_mask.mask};;
+    relationship: many_to_one
+  }
+  join: gcp_ip_range_mask {
+    type: left_outer
+    sql_on: NET.SAFE_IP_FROM_STRING(${first_2_Hop.target}) & NET.IP_NET_MASK(4, mask) = ${gcp_ip_range_mask.network_bin} and mask=${gcp_ip_range_mask.mask} ;;
+    relationship: many_to_one
+  }
 }
 
 

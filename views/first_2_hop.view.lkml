@@ -4,6 +4,7 @@ view: first_2_Hop {
       insertID,
       UserID,
       ClientIP,
+      target,
       NET.SAFE_IP_FROM_STRING(ClientIP) as ClientIP_byte,
       name,
       if(safe_cast(Time as timestamp) is null,null,Time) as Time,
@@ -30,6 +31,11 @@ view: first_2_Hop {
   dimension: client_ip {
     type: string
     sql: ${TABLE}.ClientIP ;;
+  }
+
+  dimension: target {
+    type: string
+    sql: ${TABLE}.target ;;
   }
 
   dimension: clientIP_byte {
