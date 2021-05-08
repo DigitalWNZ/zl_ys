@@ -200,7 +200,7 @@ explore: htzx_asia_update {
     explore: lz_net_dig_test_yh {
       view_name: lz_net_dig_test
       sql_always_where:BYTE_LENGTH(NET.SAFE_IP_FROM_STRING(${lz_net_dig_test.client_ip})) = 4
-      and ${lz_net_dig_test.diagtype} = 4 and ${lz_net_dig_test.average} > 0 and ${lz_net_dig_test.average}<=1000;;
+      and ${lz_net_dig_test.diagtype} = 1 and ${lz_net_dig_test.average} > 0 and ${lz_net_dig_test.average}<=1000;;
       always_join: [dummy]
       join: dummy {
         sql: ,unnest(GENERATE_ARRAY(9,32)) mask;;
