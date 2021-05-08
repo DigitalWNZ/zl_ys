@@ -154,12 +154,12 @@
     series_types: {}
     defaults_version: 1
     listen:
+      Diff Asn (Yes / No): gcp_hop_dive.diff_asn
       Time Time: gcp_hop_dive.time_time
       Country Iso Code: geo_ip_country_mask.country_iso_code
       ISP: geo_ip_isp_mask.isp
       Asn: geo_ip_isp_mask.asn
       Metro: gcp_hop_dive.metro
-      Diff Asn (Yes / No): gcp_hop_dive.diff_asn
     row: 37
     col: 0
     width: 24
@@ -223,12 +223,12 @@
     defaults_version: 1
     series_types: {}
     listen:
+      Diff Asn (Yes / No): gcp_hop_dive.diff_asn
       Time Time: gcp_hop_dive.time_time
       Country Iso Code: geo_ip_country_mask.country_iso_code
       ISP: geo_ip_isp_mask.isp
       Asn: geo_ip_isp_mask.asn
       Metro: gcp_hop_dive.metro
-      Diff Asn (Yes / No): gcp_hop_dive.diff_asn
     row: 19
     col: 0
     width: 24
@@ -292,12 +292,12 @@
     defaults_version: 1
     series_types: {}
     listen:
+      Diff Asn (Yes / No): gcp_hop_dive.diff_asn
       Time Time: gcp_hop_dive.time_time
       Country Iso Code: geo_ip_country_mask.country_iso_code
       ISP: geo_ip_isp_mask.isp
       Asn: geo_ip_isp_mask.asn
       Metro: gcp_hop_dive.metro
-      Diff Asn (Yes / No): gcp_hop_dive.diff_asn
     row: 28
     col: 0
     width: 24
@@ -335,18 +335,18 @@
     series_types: {}
     defaults_version: 1
     listen:
+      Diff Asn (Yes / No): gcp_hop_dive.diff_asn
       Time Time: gcp_hop_dive.time_time
       Country Iso Code: geo_ip_country_mask.country_iso_code
       ISP: geo_ip_isp_mask.isp
       Asn: geo_ip_isp_mask.asn
       Metro: gcp_hop_dive.metro
-      Diff Asn (Yes / No): gcp_hop_dive.diff_asn
     row: 45
     col: 0
     width: 24
     height: 13
-  - title: New Tile
-    name: New Tile
+  - title: Route Detail
+    name: Route Detail
     model: zl_asia_0422
     explore: hop_by_ip_yh_route
     type: looker_grid
@@ -375,15 +375,22 @@
     conditional_formatting_include_totals: false
     conditional_formatting_include_nulls: false
     defaults_version: 1
-    row:
-    col:
-    width:
-    height:
+    listen:
+      Time Time: first_2_Hop.time_time
+      Country Iso Code: geo_ip_country_mask.country_iso_code
+      ISP: geo_ip_isp_mask.isp
+      Asn: geo_ip_isp_mask.asn
+      Metro: gcp_hop_dive.metro
+      Country Iso Code - Target: gcp_ip_range_mask.country_iso_code
+    row: 58
+    col: 0
+    width: 24
+    height: 16
   filters:
   - name: Time Time
     title: Time Time
     type: field_filter
-    default_value: 5 day
+    default_value: 10 day
     allow_multiple_values: true
     required: false
     ui_config:
@@ -464,3 +471,17 @@
     explore: gcp_hop_dive
     listens_to_filters: []
     field: gcp_hop_dive.diff_asn
+  - name: Country Iso Code - Target
+    title: Country Iso Code - Target
+    type: field_filter
+    default_value: ''
+    allow_multiple_values: true
+    required: false
+    ui_config:
+      type: checkboxes
+      display: popover
+      options: []
+    model: zl_asia_0422
+    explore: hop_by_ip_yh_route
+    listens_to_filters: []
+    field: gcp_ip_range_mask.country_iso_code
