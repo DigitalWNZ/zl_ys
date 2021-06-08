@@ -20,7 +20,8 @@ view: gcp_hop {
              where diagtype=2
              group by insertID),
              gcp_hop as (
-             select a.InsertID, a.UserID,a.clientIP,a.name,a.Time, tracert_array.Hop as Hop_gcp,tracert_array.Delay as Delay_gcp,borgmon.gcp_peer_asn,borgmon.Metro,
+             --select a.InsertID, a.UserID,a.clientIP,a.name,a.Time, tracert_array.Hop as Hop_gcp,tracert_array.Delay as Delay_gcp,borgmon.gcp_peer_asn,borgmon.Metro,
+             select a.InsertID, a.UserID,a.clientIP,a.name,a.EventTime as Time, tracert_array.Hop as Hop_gcp,tracert_array.Delay as Delay_gcp,borgmon.gcp_peer_asn,borgmon.Metro,
              from ${lz_net_dig_test.SQL_TABLE_NAME} a
              cross join unnest(Tracert) tracert_array
              join `opscenter.networktest.borgmonfull` borgmon on tracert_array.Hop = borgmon.Peer_IPv4

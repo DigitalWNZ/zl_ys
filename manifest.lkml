@@ -1,5 +1,5 @@
 constant: lzdiagtable {
-  value: "opscenter.network_diagnosis_asia.htzx_asia"
+  value: "opscenter.network_diagnosis_asia.htzx_asia_netdiagnose"
 }
 
 constant: cdnview{

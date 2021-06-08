@@ -115,11 +115,18 @@ view: lz_net_dig_test {
 #     sql: ${TABLE}.Time ;;
 #   }
 
+  # dimension_group: time {
+  #   type: time
+  #   timeframes: [raw, time, date, hour,hour_of_day, day_of_week,
+  #     day_of_week_index, time_of_day, week,month_num, month, year, quarter,quarter_of_year]
+  #   sql: timestamp(${TABLE}.time);;
+  # }
+
   dimension_group: time {
     type: time
     timeframes: [raw, time, date, hour,hour_of_day, day_of_week,
       day_of_week_index, time_of_day, week,month_num, month, year, quarter,quarter_of_year]
-    sql: timestamp(${TABLE}.time);;
+    sql: ${TABLE}.EventTime;;
   }
 
   # dimension_group: time {

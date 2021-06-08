@@ -498,7 +498,7 @@ explore: hop_by_ip_yh_route {
     }
     join: geo_ip_country_mask {
       type: inner
-      sql_on: NET.SAFE_IP_FROM_STRING(${first_Hop.client_ip}}) & NET.IP_NET_MASK(4, mask) = ${geo_ip_country_mask.network_bin} and mask=${geo_ip_country_mask.mask};;
+      sql_on: NET.SAFE_IP_FROM_STRING(${first_Hop.client_ip}) & NET.IP_NET_MASK(4, mask) = ${geo_ip_country_mask.network_bin} and mask=${geo_ip_country_mask.mask};;
       relationship: many_to_one
     }
     join: dummy1 {

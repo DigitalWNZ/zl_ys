@@ -1,6 +1,8 @@
 view: gcp_hop_dive {
   derived_table: {
-    sql: select a.insertID,a.clientIP,a.Time, tracert_array.Hop as Hop_gcp,tracert_array.Delay as Delay_gcp,borgmon.gcp_peer_asn,borgmon.Metro,
+    sql:
+       --select a.insertID,a.clientIP,a.Time, tracert_array.Hop as Hop_gcp,tracert_array.Delay as Delay_gcp,borgmon.gcp_peer_asn,borgmon.Metro,
+       select a.insertID,a.clientIP,a.EventTime as Time, tracert_array.Hop as Hop_gcp,tracert_array.Delay as Delay_gcp,borgmon.gcp_peer_asn,borgmon.Metro,
        from `opscenter.network_diagnosis_asia.htzx_asia` a, unnest(Tracert) tracert_array
        join `opscenter.networktest.borgmonfull` borgmon on tracert_array.Hop = borgmon.Peer_IPv4
        where a.diagtype=2

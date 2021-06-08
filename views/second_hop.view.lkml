@@ -6,7 +6,8 @@ view: second_Hop {
       ClientIP,
       NET.SAFE_IP_FROM_STRING(ClientIP) as ClientIP_byte,
       name,
-      if(safe_cast(Time as timestamp) is null,null,Time) as Time,
+      --if(safe_cast(Time as timestamp) is null,null,Time) as Time,
+      EventTime as time,
       if(array_length(Tracert)<=1,null,tracert[offset(1)].Hop) as Hop1,
       if(array_length(Tracert)<=1,null,tracert[offset(1)].Delay) as Delay1
       from ${lz_net_dig_test.SQL_TABLE_NAME}
