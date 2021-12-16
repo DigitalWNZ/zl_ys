@@ -532,8 +532,8 @@
     col: 0
     width: 24
     height: 9
-  - title: pos_status_by_country_30m
-    name: pos_status_by_country_30m
+  - title: pos_status_count_by_country_30m
+    name: pos_status_count_by_country_30m
     model: zl_asia_0422
     explore: htzx_asia_update
     type: looker_line
@@ -651,7 +651,7 @@
       ISP: geo_ip_isp_mask.isp
       Client_ASN: geo_ip_isp_mask.asn
       ClientIP: htzx_asia_update.client_ip
-    row: 105
+    row: 131
     col: 0
     width: 24
     height: 9
@@ -707,7 +707,7 @@
       Server Domain Name: lz_net_dig_test.name
       Country: geo_ip_country_mask.country_iso_code
       ClientIP: lz_net_dig_test.client_ip
-    row: 127
+    row: 151
     col: 0
     width: 24
     height: 8
@@ -756,19 +756,19 @@
       Server Domain Name: lz_net_dig_test.name
       Country: geo_ip_country_mask.country_iso_code
       ClientIP: lz_net_dig_test.client_ip
-    row: 135
+    row: 142
     col: 0
     width: 24
     height: 9
   - name: Diagtype_4_ping-stats
     type: text
     title_text: Diagtype_4_ping-stats
-    row: 125
+    row: 140
     col: 0
     width: 24
     height: 2
-  - title: pos_status_by_isp_30m
-    name: pos_status_by_isp_30m
+  - title: pos_status_count_by_isp_30m
+    name: pos_status_count_by_isp_30m
     model: zl_asia_0422
     explore: htzx_asia_update
     type: looker_line
@@ -808,7 +808,7 @@
       ISP: geo_ip_isp_mask.isp
       Client_ASN: geo_ip_isp_mask.asn
       ClientIP: htzx_asia_update.client_ip
-    row: 95
+    row: 103
     col: 0
     width: 24
     height: 10
@@ -854,7 +854,7 @@
       ISP: geo_ip_isp_mask.isp
       Client_ASN: geo_ip_isp_mask.asn
       ClientIP: htzx_asia_update.client_ip
-    row: 114
+    row: 120
     col: 0
     width: 24
     height: 11
@@ -863,8 +863,8 @@
     model: zl_asia_0422
     explore: lz_net_dig_test_4_above_95
     type: looker_line
-    fields: [lz_net_dig_test_4_above_95.geo_ip_country_mask_country_iso_code, lz_net_dig_test_4_above_95.lz_net_dig_test_timekey_30_time,
-      lz_net_dig_test_4_above_95.avg_average]
+    fields: [lz_net_dig_test_4_above_95.geo_ip_country_mask_country_iso_code, lz_net_dig_test_4_above_95.avg_average,
+      lz_net_dig_test_4_above_95.lz_net_dig_test_timekey_30_time_time]
     pivots: [lz_net_dig_test_4_above_95.geo_ip_country_mask_country_iso_code]
     sorts: [lz_net_dig_test_4_above_95.geo_ip_country_mask_country_iso_code 0, lz_net_dig_test_4_above_95.lz_net_dig_test_timekey_30_time
         desc]
@@ -904,10 +904,123 @@
       Date: lz_net_dig_test_4_above_95.time_date
       Country: lz_net_dig_test_4_above_95.geo_ip_country_mask_country_iso_code
       ClientIP: lz_net_dig_test_4_above_95.client_ip
-    row: 144
+    row: 159
     col: 0
     width: 24
     height: 10
+  - title: pos_status_rate_by_country_30m
+    name: pos_status_rate_by_country_30m
+    model: zl_asia_0422
+    explore: htzx_asia_update
+    type: looker_line
+    fields: [htzx_asia_update.timekey_30_time, geo_ip_country_mask.country_iso_code,
+      htzx_asia_update.count_status_1_rate]
+    pivots: [geo_ip_country_mask.country_iso_code]
+    filters: {}
+    sorts: [htzx_asia_update.timekey_30_time desc, geo_ip_country_mask.country_iso_code]
+    limit: 500
+    column_limit: 50
+    query_timezone: Asia/Shanghai
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    show_null_points: true
+    interpolation: linear
+    ordering: none
+    show_null_labels: false
+    show_totals_labels: false
+    show_silhouette: false
+    totals_color: "#808080"
+    series_types: {}
+    defaults_version: 1
+    hidden_series: [AU - htzx_asia_update.count_status_1, BY - htzx_asia_update.count_status_1,
+      CA - htzx_asia_update.count_status_1, CN - htzx_asia_update.count_status_1,
+      HK - htzx_asia_update.count_status_1, ID - htzx_asia_update.count_status_1,
+      IL - htzx_asia_update.count_status_1, IQ - htzx_asia_update.count_status_1,
+      KE - htzx_asia_update.count_status_1, KR - htzx_asia_update.count_status_1,
+      LA - htzx_asia_update.count_status_1, MM - htzx_asia_update.count_status_1,
+      MO - htzx_asia_update.count_status_1, MY - htzx_asia_update.count_status_1,
+      PH - htzx_asia_update.count_status_1, PL - htzx_asia_update.count_status_1,
+      SG - htzx_asia_update.count_status_1, TH - htzx_asia_update.count_status_1,
+      TW - htzx_asia_update.count_status_1, US - htzx_asia_update.count_status_1,
+      VN - htzx_asia_update.count_status_1]
+    listen:
+      Date: htzx_asia_update.time_date
+      Country: geo_ip_country_mask.country_iso_code
+      ISP: geo_ip_isp_mask.isp
+      Client_ASN: geo_ip_isp_mask.asn
+      ClientIP: htzx_asia_update.client_ip
+    row: 95
+    col: 0
+    width: 24
+    height: 8
+  - title: pos_status_rate_by_isp_30m
+    name: pos_status_rate_by_isp_30m
+    model: zl_asia_0422
+    explore: htzx_asia_update
+    type: looker_line
+    fields: [htzx_asia_update.timekey_30_time, geo_ip_isp_mask.isp, htzx_asia_update.count_status_1_rate]
+    pivots: [geo_ip_isp_mask.isp]
+    filters: {}
+    sorts: [htzx_asia_update.timekey_30_time desc, geo_ip_isp_mask.isp]
+    limit: 500
+    column_limit: 50
+    query_timezone: Asia/Shanghai
+    x_axis_gridlines: false
+    y_axis_gridlines: true
+    show_view_names: false
+    show_y_axis_labels: true
+    show_y_axis_ticks: true
+    y_axis_tick_density: default
+    y_axis_tick_density_custom: 5
+    show_x_axis_label: true
+    show_x_axis_ticks: true
+    y_axis_scale_mode: linear
+    x_axis_reversed: false
+    y_axis_reversed: false
+    plot_size_by_field: false
+    trellis: ''
+    stacking: ''
+    limit_displayed_rows: false
+    legend_position: center
+    point_style: none
+    show_value_labels: false
+    label_density: 25
+    x_axis_scale: auto
+    y_axis_combined: true
+    show_null_points: true
+    interpolation: linear
+    series_types: {}
+    defaults_version: 1
+    listen:
+      Date: htzx_asia_update.time_date
+      Country: geo_ip_country_mask.country_iso_code
+      ISP: geo_ip_isp_mask.isp
+      Client_ASN: geo_ip_isp_mask.asn
+      ClientIP: htzx_asia_update.client_ip
+    row: 113
+    col: 0
+    width: 24
+    height: 7
   filters:
   - name: Date
     title: Date
