@@ -71,7 +71,8 @@ view: htzx_asia_update {
     type: time
     timeframes: [raw, time, date, hour,hour_of_day, day_of_week,
       day_of_week_index, time_of_day, week,month_num, month, year, quarter,quarter_of_year]
-    sql: timestamp(${TABLE}.time);;
+    # sql: timestamp(${TABLE}.time);;
+    sql: ${TABLE}.EventTime ;;
   }
 
   # dimension_group: time {
@@ -84,7 +85,8 @@ view: htzx_asia_update {
   dimension_group: timekey_30 {
     type: time
     timeframes: [time]
-    sql: TIMESTAMP_SECONDS(30*60 * DIV(UNIX_SECONDS(timestamp(${time_time})), 30*60)) ;;
+    # sql: TIMESTAMP_SECONDS(30*60 * DIV(UNIX_SECONDS(timestamp(${time_time})), 30*60)) ;;
+    sql: TIMESTAMP_SECONDS(30*60 * DIV(UNIX_SECONDS(${time_raw}), 30*60)) ;;
   }
 
   dimension: url {
@@ -148,6 +150,11 @@ view: htzx_asia_update {
     filters: [status: "1"]
   }
 
+  measure: count_status_1_rate {
+    type: number
+    sql: ${count_status_1}/${count} ;;
+    value_format_name: percent_2
+  }
 
 
 }

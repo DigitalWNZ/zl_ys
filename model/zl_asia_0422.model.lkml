@@ -5,7 +5,7 @@ include: "/views/**/*.view"
 include: "/lookml_dashboard/**/*.dashboard"
 
 datagroup: zl_su_sea_default_datagroup {
-  # sql_trigger: SELECT MAX(id) FROM etl_log;;
+  sql_trigger: SELECT EXTRACT(HOUR FROM CURRENT_TIMESTAMP());;
   max_cache_age: "1 hour"
 }
 

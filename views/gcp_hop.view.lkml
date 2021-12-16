@@ -31,7 +31,8 @@ view: gcp_hop {
              case when safe_cast(x.Delay_gcp as int64) = y.delay then 1 else 0 end as gcp_max
              from gcp_hop x
              left join max_delay y on x.insertID = y.insertID
-             where safe_cast(x.Time as timestamp) is not null;;
+             where x.Time  is not null;;
+            # where safe_cast(x.Time as timestamp) is not null;;
 }
 
 measure: count {
@@ -73,7 +74,8 @@ dimension_group: time {
   type: time
   timeframes: [raw, time, date, hour,hour_of_day, day_of_week,
     day_of_week_index, time_of_day, week,month_num, month, year, quarter,quarter_of_year]
-  sql: timestamp(${TABLE}.time);;
+  # sql: timestamp(${TABLE}.time);;
+  sql: ${TABLE}.time;;
 }
 
 dimension: hop_gcp {

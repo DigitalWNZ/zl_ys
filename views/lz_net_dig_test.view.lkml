@@ -139,19 +139,22 @@ view: lz_net_dig_test {
   dimension_group: timekey {
     type: time
     timeframes: [time]
-    sql: TIMESTAMP_SECONDS(5*60 * DIV(UNIX_SECONDS(timestamp(${time_time})), 5*60)) ;;
+    # sql: TIMESTAMP_SECONDS(5*60 * DIV(UNIX_SECONDS(timestamp(${time_time})), 5*60)) ;;
+    sql: TIMESTAMP_SECONDS(5*60 * DIV(UNIX_SECONDS(${time_raw}), 5*60)) ;;
   }
 
   dimension_group: timekey_10 {
     type: time
     timeframes: [time]
-    sql: TIMESTAMP_SECONDS(10*60 * DIV(UNIX_SECONDS(timestamp(${time_time})), 10*60)) ;;
+    # sql: TIMESTAMP_SECONDS(10*60 * DIV(UNIX_SECONDS(timestamp(${time_time})), 10*60)) ;;
+    sql: TIMESTAMP_SECONDS(10*60 * DIV(UNIX_SECONDS(${time_raw}), 10*60)) ;;
   }
 
   dimension_group: timekey_30 {
     type: time
     timeframes: [time]
-    sql: TIMESTAMP_SECONDS(30*60 * DIV(UNIX_SECONDS(timestamp(${time_time})), 30*60)) ;;
+    # sql: TIMESTAMP_SECONDS(30*60 * DIV(UNIX_SECONDS(timestamp(${time_time})), 30*60)) ;;
+    sql: TIMESTAMP_SECONDS(10*60 * DIV(UNIX_SECONDS(${time_raw}), 10*60)) ;;
   }
 
   dimension: total {
