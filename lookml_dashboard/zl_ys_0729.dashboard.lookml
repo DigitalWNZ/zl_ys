@@ -1,5 +1,5 @@
-- dashboard: zl_asia_2_0422
-  title: zl_ASIA_2_0422
+- dashboard: zl_ys_0729
+  title: zl_ys_0729
   layout: newspaper
   preferred_viewer: dashboards
   elements:

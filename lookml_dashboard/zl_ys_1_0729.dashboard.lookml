@@ -1,11 +1,11 @@
-- dashboard: zl_asia_1_0422
-  title: zl_ASIA_1_0422
+- dashboard: zl_ys_1_0729
+  title: zl_ys_1_0729
   layout: newspaper
   preferred_viewer: dashboards
   elements:
   - title: lost_rate_by_country
     name: lost_rate_by_country
-    model: zl_asia_0422
+    model: zl_ys_0729
     explore: lz_net_dig_test_1
     type: looker_line
     fields: [geo_ip_country_mask.country_iso_code, lz_net_dig_test.lost_rate, lz_net_dig_test.timekey_30_time,
@@ -76,7 +76,7 @@
     height: 14
   - title: delay_gcp_hist
     name: delay_gcp_hist
-    model: zl_asia_0422
+    model: zl_ys_0729
     explore: gcp_hop
     type: looker_column
     fields: [gcp_hop.delay_gcp_hist, gcp_hop.asn_isp_peer_0422, gcp_hop.count]
@@ -137,7 +137,7 @@
     height: 2
   - title: lost_rate_interval_by_hour_v1
     name: lost_rate_interval_by_hour_v1
-    model: zl_asia_0422
+    model: zl_ys_0729
     explore: lz_net_dig_test_1
     type: looker_column
     fields: [lz_net_dig_test.count, lz_net_dig_test.time_hour, lz_net_dig_test.lost_rate_interval]
@@ -185,7 +185,7 @@
     height: 10
   - title: pert95_by_country_v1
     name: pert95_by_country_v1
-    model: zl_asia_0422
+    model: zl_ys_0729
     explore: lz_net_dig_test_2
     type: looker_line
     fields: [lz_net_dig_test.timekey_30_time, geo_ip_country_mask.country_iso_code,
@@ -252,7 +252,7 @@
     height: 12
   - title: pert80_by_country_v1
     name: pert80_by_country_v1
-    model: zl_asia_0422
+    model: zl_ys_0729
     explore: lz_net_dig_test_2
     type: looker_line
     fields: [lz_net_dig_test.timekey_30_time, geo_ip_country_mask.country_iso_code,
@@ -319,7 +319,7 @@
     height: 12
   - title: First Hop Delay
     name: First Hop Delay
-    model: zl_asia_0422
+    model: zl_ys_0729
     explore: first_Hop
     type: looker_column
     fields: [first_Hop.delay0_hist, first_Hop.count, geo_ip_isp_mask.isp]
@@ -370,7 +370,7 @@
     height: 12
   - title: Second Hop Delay
     name: Second Hop Delay
-    model: zl_asia_0422
+    model: zl_ys_0729
     explore: second_Hop
     type: looker_column
     fields: [geo_ip_isp_mask.isp, second_Hop.delay1_hist, second_Hop.count]
@@ -421,7 +421,7 @@
     height: 12
   - title: ping_interval_by_isp
     name: ping_interval_by_isp
-    model: zl_asia_0422
+    model: zl_ys_0729
     explore: lz_net_dig_test_1
     type: looker_column
     fields: [lz_net_dig_test.average_interval, geo_ip_isp_mask.isp, lz_net_dig_test.valid_count]
@@ -472,7 +472,7 @@
     height: 14
   - title: ping_interval_by_country
     name: ping_interval_by_country
-    model: zl_asia_0422
+    model: zl_ys_0729
     explore: lz_net_dig_test_1
     type: looker_column
     fields: [lz_net_dig_test.average_interval, geo_ip_country_mask.country_iso_code,
@@ -534,7 +534,7 @@
     height: 9
   - title: pos_status_count_by_country_30m
     name: pos_status_count_by_country_30m
-    model: zl_asia_0422
+    model: zl_ys_0729
     explore: htzx_asia_update
     type: looker_line
     fields: [htzx_asia_update.timekey_30_time, htzx_asia_update.count_status_1, geo_ip_country_mask.country_iso_code]
@@ -595,7 +595,7 @@
     height: 8
   - title: download_speed_by_country_30m
     name: download_speed_by_country_30m
-    model: zl_asia_0422
+    model: zl_ys_0729
     explore: htzx_asia_update
     type: looker_line
     fields: [htzx_asia_update.timekey_30_time, geo_ip_country_mask.country_iso_code,
@@ -664,7 +664,7 @@
     height: 2
   - title: diagtype_4_p95
     name: diagtype_4_p95
-    model: zl_asia_0422
+    model: zl_ys_0729
     explore: lz_net_dig_test_4
     type: looker_line
     fields: [lz_net_dig_test.timekey_30_time, geo_ip_country_mask.country_iso_code,
@@ -713,7 +713,7 @@
     height: 8
   - title: diagtype_4_p80
     name: diagtype_4_p80
-    model: zl_asia_0422
+    model: zl_ys_0729
     explore: lz_net_dig_test_4
     type: looker_line
     fields: [lz_net_dig_test.timekey_30_time, geo_ip_country_mask.country_iso_code,
@@ -769,7 +769,7 @@
     height: 2
   - title: pos_status_count_by_isp_30m
     name: pos_status_count_by_isp_30m
-    model: zl_asia_0422
+    model: zl_ys_0729
     explore: htzx_asia_update
     type: looker_line
     fields: [htzx_asia_update.count_status_1, htzx_asia_update.timekey_30_time, geo_ip_isp_mask.isp]
@@ -814,7 +814,7 @@
     height: 10
   - title: download_speed_by_isp_30m
     name: download_speed_by_isp_30m
-    model: zl_asia_0422
+    model: zl_ys_0729
     explore: htzx_asia_update
     type: looker_line
     fields: [htzx_asia_update.avg_download_speed, htzx_asia_update.timekey_30_time,
@@ -860,7 +860,7 @@
     height: 11
   - title: average among 95
     name: average among 95
-    model: zl_asia_0422
+    model: zl_ys_0729
     explore: lz_net_dig_test_4_above_95
     type: looker_line
     fields: [lz_net_dig_test_4_above_95.geo_ip_country_mask_country_iso_code, lz_net_dig_test_4_above_95.avg_average,
@@ -910,7 +910,7 @@
     height: 10
   - title: pos_status_rate_by_country_30m
     name: pos_status_rate_by_country_30m
-    model: zl_asia_0422
+    model: zl_ys_0729
     explore: htzx_asia_update
     type: looker_line
     fields: [htzx_asia_update.timekey_30_time, geo_ip_country_mask.country_iso_code,
@@ -975,7 +975,7 @@
     height: 8
   - title: pos_status_rate_by_isp_30m
     name: pos_status_rate_by_isp_30m
-    model: zl_asia_0422
+    model: zl_ys_0729
     explore: htzx_asia_update
     type: looker_line
     fields: [htzx_asia_update.timekey_30_time, geo_ip_isp_mask.isp, htzx_asia_update.count_status_1_rate]
@@ -1031,7 +1031,7 @@
     ui_config:
       type: advanced
       display: popover
-    model: zl_asia_0422
+    model: zl_ys_0729
     explore: lz_net_dig_test_1
     listens_to_filters: []
     field: lz_net_dig_test.time_date
@@ -1044,7 +1044,7 @@
     ui_config:
       type: advanced
       display: popover
-    model: zl_asia_0422
+    model: zl_ys_0729
     explore: lz_net_dig_test_1
     listens_to_filters: []
     field: lz_net_dig_test.name
@@ -1084,7 +1084,7 @@
     ui_config:
       type: advanced
       display: popover
-    model: zl_asia_0422
+    model: zl_ys_0729
     explore: stat_from_cdn
     listens_to_filters: []
     field: stat_from_cdn.remote_ip
